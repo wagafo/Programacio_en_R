@@ -1,0 +1,362 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Funcions
+  Author: Sean Kross, Walter Garcia-Fontes
+  Type: Standard
+  Organization: swirlstats
+  Version: 2.2.14
+
+- Class: text
+  Output: Les funcions són un dels blocs fonamentals de construcció per al
+    llenguatge de programació R. Són petites peces de codi reutilitzable
+    que es poden tractar com qualsevol altre objecte de R.
+
+- Class: text
+  Output: Si heu treballat qualsevol altra part d'aquest curs, probablement
+    ja heu fet servir algunes funcions. Les funcions generalment es
+    caracteritzen pel nom de la funció seguida d'un parèntesi.
+
+- Class: cmd_question
+  Output: Usem algunes funcions bàsiques simplement per diversió.
+    La funció Sys.Date() ens retorna una cadena representant la data d'avui.
+    Entreu Sys.Date() a sota i mireu què passa.
+  CorrectAnswer: Sys.Date()
+  AnswerTests: omnitest(correctExpr='Sys.Date()')
+  Hint: Mostreu la data d'avui entrant Sys.Date()
+
+- Class: text
+  Output: La major part de les funcions de R retornen un valor. Les funcions
+    com ara Sys.Date() retornen un valor basant-se en l'entorn de l'ordinador,
+    mentre que altres funcions manipulen dades d'entrada per calcular un valor
+    a retornar.
+
+- Class: cmd_question
+  Output: La funció mean() agafa un vector numèric com a entrada, i retorna
+    la mitjana de tots els números del vector d'entrada. Les entrades a
+    les funcions generalment s'anomenen arguments. La provisió d'arguments
+    a una funció generalment s'anomena «passar» arguments a la funció.
+    Els arguments que voleu passar a una funció es posen a dins dels
+    parèntesis de la funció. Proveu de passar l'argument c(2, 4, 5) a la
+    funció mean().
+  CorrectAnswer: mean(c(2, 4, 5))
+  AnswerTests: omnitest(correctExpr='mean(c(2, 4, 5))')
+  Hint: Calculeu la mitjana de 2, 4 i 5 entrant mean(c(2, 4, 5))
+
+- Class: text
+  Output: Les funcions en general prenen arguments que són variables sobre
+    les quals opera la funció. Per exemple, la funció mean() agafa un
+    vector com a argument, com en el cas de mean(c(2, 6, 8)). La funció
+    mean() aleshores suma tots els elements (nombres) del vector i els
+    divideix per la longitud del vector.
+
+- Class: text
+  Output: A la pregunta següent se us demanarà modificar un script que
+    apareixerà de seguida que passeu a la següent pregunta. Quan haveu
+    acabat de modificar l'script, deseu els vostres canvis a l'script i
+    entreu submit() i s'avaluarà l'script. Hi haurà alguns comentaris
+    a l'script que s'obrirà, assegureu-vos de llegir-los!
+
+- Class: script
+  Output: L'última expressió de R a avaluar a una funció serà el valor
+    que la funció retornarà. Volem que aquesta funció tingui un argument,
+    x, i que retorni x sense modificar-lo. Elimineu el símbol coixinet "#"
+    perquè x es retorni sense modificació. Assegureu-vos de desar el vostre
+    script abans de entrar submit().
+  AnswerTests: test_func1()
+  Hint: Assegureu-vos d'eliminar el símbol coixinet "#" perquè l'última
+    expressió a la funció sigui sols x.
+  Script: boring_function.R
+
+- Class: cmd_question
+  Output: "Ara que heu creat la vostra primera funció, anem a provar-la!
+    Entreu boring_function('La meva primera funció!'). Si la vostra funció
+    funciona, hauria de retornar la cadena: 'La meva primera funció!'."
+  CorrectAnswer: "boring_function('La meva primera funció!')"
+  AnswerTests: omnitest(correctExpr="boring_function('La meva primera funció!')")
+  Hint: Comproveu la funció entrant boring_function('La meva primera funció!')
+
+- Class: text
+  Output: "Enhorabona per escriure la vostra primera funció. Escrivint
+    funcions podeu comprendre més a fons com funciona R. Com va dir un cop
+    John Chambers, el creador de l'R: \n\n Per entendre els càlculs a l'R,
+    són útils dos eslògans:
+      1. Tot el que existeix és un objecte. 2. Tot el que passa és una crida a una funció."
+
+- Class: cmd_question
+  Output: Si voleu veure el codi font de qualsevol funció, simplement entreu
+    el nom de la funció sense arguments o parèntesis. Provem això amb la
+    funció que heu acabat de crear. Entreu boring_function per veure el
+    codi font.
+  CorrectAnswer: boring_function
+  AnswerTests: omnitest(correctExpr='boring_function')
+  Hint: Per veure el codi font per a boring_function simplement entreu
+    boring_function
+
+- Class: text
+  Output: "És hora de fer una funció més útil! Replicarem la funcionalitat
+    de la funció mean() creant una funció anomenada: my_mean(). Recordeu
+    que per calcular la mitjana de tots els elements d'un vector numèric,
+    calculeu la suma de tots els números d'un vector, i després dividiu
+    aquesta suma per el nombre d'elements del vector."
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans d'entrar submit().
+  AnswerTests: test_func2()
+  Hint: Useu la funció sum() per trobar al suma de tots els element del vector.
+     Useu la funció length() per trobar la mida del vector.
+  Script: my_mean.R
+
+- Class: cmd_question
+  Output: Provem ara la funció my_mean() trobant la mitjana del vector
+    c(4, 5, 10).
+  CorrectAnswer: my_mean(c(4, 5, 10))
+  AnswerTests: omnitest(correctExpr='my_mean(c(4, 5, 10))')
+  Hint: Executeu l'ordre my_mean(c(4, 5, 10)) per provar la vostra nova
+    funció.
+
+- Class: text
+  Output: A continuació, provem d'escriure una funció sense arguments
+     predeterminats. Podeu establir els valors predeterminats per als
+     arguments de la funció, i això pot ser útil si penseu que algú que fa
+     servir la vostra funció establirà sovint algun dels arguments de la funció
+     al mateix valor.
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans d'entrar submit().
+  AnswerTests: test_func3()
+  Hint: Recordeu-vos d'establir els valors predeterminats apropiats!
+  Script: remainder.R
+
+- Class: cmd_question
+  Output: Anem a fer algunes proves amb la funció remainder. Proveu
+    remainder(5) i mireu el que passa.
+  CorrectAnswer: remainder(5)
+  AnswerTests: omnitest(correctExpr='remainder(5)')
+  Hint: "Proveu la funció remainder executant: remainder(5)"
+
+- Class: text
+  Output: Dediquem un moment a examinar el que acaba de passar. Heu proveït
+    un argument a la funció, i R va fer concordar aquest argument a 'num',
+    atès que 'num' és el primer argument. El valor predeterminat per 'divisor'
+    és 2, de manera que la funció ha usat el valor predeterminat que heu
+    proveït.
+
+- Class: cmd_question
+  Output: Anem ara a provar la funció remainder proveint dos arguments.
+    Entreu remainder(11, 5) i mirem el que passa.
+  CorrectAnswer: remainder(11, 5)
+  AnswerTests: omnitest(correctExpr='remainder(11, 5)')
+  Hint: Provem la funció remainder executant remainder(11, 5)
+
+- Class: text
+  Output: Un cop més, els arguments s'han emparellat apropiadament.
+
+- Class: cmd_question
+  Output: També podeu especificar explícitament argumentes a una funció.
+    Quan designeu explícitament valors dels arguments pel seu nom,
+    l'ordre dels arguments ja no és important. Podeu provar això entrant
+    remainder(divisor = 11, num = 5).
+  CorrectAnswer: remainder(divisor = 11, num = 5)
+  AnswerTests: omnitest(correctExpr='remainder(divisor = 11, num = 5)')
+  Hint: L'ordre ja no importa quan plantegeu explícitament els valors
+    dels arguments! Proveu això entrant remainder(divisor = 11, num = 5)
+
+- Class: text
+  Output: Com podeu veure, hi ha una diferència significativa entre
+     remainder(11, 5) i remainder(divisor = 11, num = 5)!
+
+- Class: cmd_question
+  Output: R també pot emparellar parcialment els arguments. Proveu entrar
+    remainder(4, div = 2) per veure aquesta característica en acció.
+  CorrectAnswer: remainder(4, div = 2)
+  AnswerTests: omnitest(correctExpr='remainder(4, div = 2)')
+  Hint: Proveu el emparellament parcial entrant remainder(4, div = 2)
+
+- Class: text
+  Output: "Una paraula d'advertiment: en general voleu que el vostre
+    codi sigui el més fàcil d'entendre que sigui possible. Canviant
+    els ordres dels arguments especificant els seus noms o usant sols
+    noms parcials d'arguments pot ser confús, així que useu aquestes
+    característiques amb precaució!"
+
+- Class: cmd_question
+  Output: Amb tot el que estem dient sobre argument, us estareu preguntant
+    si hi ha alguna manera que podeu veure els arguments d'una funció
+    (a part de mirar la documentació). Afortunadament, podeu usar la
+    funció args()! Entreu args(remainder) per examinar els arguments
+    de la funció remainder.
+  CorrectAnswer: args(remainder)
+  AnswerTests: omnitest(correctExpr='args(remainder)')
+  Hint: Mireu els arguments de la funció remainder entrant
+    args(remainder)
+
+- Class: text
+  Output: Potser no us adoneu però us hem portat a fer quelcom força
+    interessant! args() és una funció, remainder() és també una funció,
+    tot i així remainder ha estat un argument de args(). Sí, és veritat,
+    podeu passar funcions com arguments! Això és un concepte molt poderós.
+    Anem a escriure un script per veure com funciona.
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans d'entrar submit().
+  AnswerTests: test_func4()
+  Hint: Assegureu-vos que quan passeu una funció com un argument passeu
+    el nom de la funció sense parèntesis!
+  Script: evaluate.R
+
+- Class: cmd_question
+  Output: Anem a provar a vostra nova funció evaluate()! Useu evaluate
+    per trobar la mediana del vector c(1.4, 3.6, 7.9, 8.8).
+  CorrectAnswer: evaluate(median, c(1.4, 3.6, 7.9, 8.8))
+  AnswerTests: omnitest(correctExpr='evaluate(median, c(1.4, 3.6, 7.9, 8.8))')
+  Hint: La funció per a la desviació estàndard es diu median(). Assegureu-vos
+    que passeu una funció com a argument passeu el nom de la funció sense
+    parèntesis!
+
+- Class: text
+  Output: La idea de passar funcions com a arguments a altres funcions és
+    un concepte important i fonamental a la programació.
+
+- Class: text
+  Output: Potser us sorprèn saber que podeu passar una funció com un
+    argument sense primer definir la funció passada. Les funcions que no
+    estan definides es coneixen apropiadament com funcions anònimes
+
+- Class: text
+  Output: Usem la funció evaluate per explorar com funcionen les funcions
+    anònimes. Per al primer argument de la funció evaluate escriurem una
+    funció petita que cap en una línia. Al segon argument passarem
+    algunes dades a la petita funció del primer argument.
+
+- Class: cmd_question
+  Output: "Entreu l'ordre següent i després discutirem com funciona:
+    evaluate(function(x){x+1}, 6)"
+  CorrectAnswer: evaluate(function(x){x+1}, 6)
+  AnswerTests: test_eval1()
+  Hint: "Simplement entreu l'ordre evaluate(function(x){x+1}, 6)"
+
+- Class: text
+  Output: El primer argument és una petita funció anònima que pren
+    un argument «x» i retorna «x+1». Hem passat el número 6 a aquesta
+    funció perquè l'expressió sencera avaluï a 7.
+
+- Class: cmd_question
+  Output: Proveu d'usar evaluate() junt amb una funció anònima per retornar
+    el primer element del vector c(8, 4, 0). La vostra funció anònima
+    hauria de prendre únicament un argument que hauria de ser una variable
+    «x».
+  CorrectAnswer: evaluate(function(x){x[1]}, c(8, 4, 0))
+  AnswerTests: test_eval2()
+  Hint: Haureu de recordar com s'indexen els elements d'un vector. Recordeu
+    que la vostra funció anònima hauria de tenir sols un argument, i que
+    aquest argument s'hauria d'anomenar «x».
+
+- Class: cmd_question
+  Output: Proveu ara d'usar evaluate() junt amb una funció anònima per
+    retornar l'últim element del vector c(8, 4, 0). La vostra funció anònima
+    hauria de prendre únicament un argument que hauria de ser una variable
+    «x».
+  CorrectAnswer: evaluate(function(x){x[length(x)]}, c(8, 4, 0))
+  AnswerTests: test_eval3()
+  Hint: És possible que us calgui recordar com indexar els elements dels
+    vectors. Recordeu que la vostra funció anònima hauria de tenir sols
+    un argument, i que aquest argument hauria d'anomenar-se «x». L'ús
+    de la funció length() a la vostra funció anònima us pot ajudar.
+
+- Class: cmd_question
+  Output: Per a la resta del curs farem servir sovint la funció paste().
+    Entreu ?paste per mirar a la documentació sobre la funció paste.
+  CorrectAnswer: ?paste
+  AnswerTests: omnitest(correctExpr='?paste')
+  Hint: "Simplement entreu: ?paste"
+
+- Class: text
+  Output: Com podeu veure el primer argument de paste() és «...» cosa
+    que refereix a un nombre indefinit d'arguments que es poden passar a
+    aquesta funció. A això l'anomenarem una «el·lipse». En el cas de
+    paste() es pot passar qualsevol nombre de cadenes com a arguments
+    i paste() retornarà totes aquestes cadenes convertides en una única cadena.
+
+- Class: cmd_question
+  Output: 'Simplement per veure com funciona paste(), entreu
+    paste("Programar", "és", "divertit!")'
+  CorrectAnswer: paste("Programar", "és", "divertit!")
+  AnswerTests: omnitest(correctExpr='paste("Programar", "és", "divertit!")')
+  Hint: 'Simplement entreu: paste("Programar", "és", "divertit!")'
+
+- Class: text
+  Output: "Ara és el moment d'escriure la vostra pròpia versió de paste()."
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans que entreu submit().
+  AnswerTests: test_func5()
+  Hint: "Recordeu que els arguments poden venir després de l'el·lipse ..."
+  Script: telegram.R
+
+- Class: cmd_question
+  Output: Provem ara la funció telegram. Useu la vostra nova funció
+    telegram passant els argument que voleu!
+  CorrectAnswer: telegram()
+  AnswerTests: expr_uses_func('telegram')
+  Hint: Useu la funció telegram amb qualsevol argument que voleu.
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans d'entrar submit().
+  AnswerTests: test_func6()
+  Hint: 'La vostra funció hauria de tenir tres seccions: desempaquetar els
+     arguments el·lipse amb args <- list(...), assignar-los a
+     variables per exemple lloc <- args[["lloc"]], i al final passar
+     aquestes variables a paste().'
+  Script: mad_libs.R
+
+- Class: cmd_question
+  Output: Ara usarem la vostra funció mad_libs. Assegureu-vos d'anomenar
+    els arguments de lloc (lloc=...), adjectiu (adjectiu=... masculí plural)
+    i substantiu (substatiu=... masculí singular) en ordre perquè funcioni
+    la vostra funció.
+  CorrectAnswer: mad_libs(adjectiu = "", lloc = "", substantiu = "")
+  AnswerTests: expr_uses_func('mad_libs')
+  Hint: Useu la funció mad_libs i assegureu-vos d'anomenar els arguments
+     lloc, adjectiu (en plural i masculí) i substantiu (singular
+     masculí), posant els arguments per exemple
+     mad_libs(lloc="Londres", adjectiu="indignats",substantiu="sofà").
+
+- Class: text
+  Output: Estem arribant al final d'aquesta lliçó, però hi ha encara una
+    altra idea que hauríeu de conèixer.
+
+- Class: text
+  Output: Coneixeu com sumar, restar, multiplicar i dividir nombres a l'R.
+    Per fer això useu els símbols +, - , *, i /. Aquests símbols es diuen
+    operadors binaris perquè prenen sols dos entrades, una entrada per
+    l'esquerra i una altra per la dreta, els operands.
+
+- Class: text
+  Output: A l'R podeu definir els vostres propis operadors binaris. Al
+    script següent us mostrarem com.
+
+- Class: script
+  Output: Assegureu-vos de desar el vostre script abans d'entrar submit().
+  AnswerTests: test_func7()
+  Hint: "Recordeu: 'Hola' %p% 'estudiant!' és com useu el vostre operador
+    binari."
+  Script: bin_op.R
+
+- Class: cmd_question
+  Output: "Heu creat el vostre propi operador binari! Anem a provar-ho.
+    Enganxeu les cadenes: 'Jo', 'adoro', 'a' 'R!', usant el vostre
+    operador binari."
+  CorrectAnswer: "'Jo' %p% 'adoro' %p% 'a' %p% 'R!'"
+  AnswerTests: omnitest(correctExpr="'Jo' %p% 'adoro' %p% 'a' %p% 'R!'")
+  Hint: 'Useu %p% entre les diferents cadenes.'
+
+- Class: text
+  Output: "Hem arribat al final de la nostra lliçó! Ara ja sabeu com
+    escriure les funcions que us calguin."
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

@@ -1,0 +1,247 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Blocs Basics per Construir
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: "En aquesta lliçó, explorarem alguns blocs bàsics per construir programes al llenguatge de programació R"
+
+- Class: text
+  Output: "Si en qualsevol punt voleu més informació sobre un tema particular relacionat
+    amb R, podeu entrar help.start() a la línia d'ordres, cosa que obrirà un menú de recursos
+    (o bé dins de RStudio o al vostre navegador web per defecte, depenent de la vostra
+    configuració). Alternativament, una cerca simple a Internet sovint us dóna la resposta
+    que esteu buscant."
+
+- Class: cmd_question
+  Output: "En la seva forma més simple, l'R es pot usar com una calculadora interactiva. Entreu 5 + 7 i premeu Intro."
+  CorrectAnswer: 5 + 7
+  AnswerTests: omnitest(correctExpr='5 + 7')
+  Hint: Entreu 5 + 7 i premeu Intro.  
+
+- Class: text
+  Output: "L'R simplement imprimeix el resultat de 12 per defecte. Tanmateix, l'R és un llenguatge
+  de programació i sovint la raó que fem servir un llenguatge de programació en comptes de una calculadora
+  és per automatitzar processos o evitar repeticions innecessàries."
+
+- Class: text
+  Output: "En aquest cas, podem usar el nostre resultat de dalt a un segon càlcul. En comptes
+  de tornar a escriure 5 + 7 cada cop que ens cal, simplement podem crear una nova variable
+  que emmagatzema el resultat."
+
+- Class: text
+  Output: "La manera que assigneu un valor a una variable a l'R és usant el operador d'assignació,
+  que és simplement un símbol «menys que» seguit de un signe «menys». Es veu de la manera
+  següent: <-"
+
+- Class: text
+  Output: "Penseu l'operació d'assignació com una fletxa. Esteu assignant el valor de
+  la part dreta al nom de la variable a la part esquerra de la fletxa."
+
+- Class: cmd_question
+  Output: "Per assignar el resultat de 5 + 7 a una nova variable anomenada x, escriviu
+  x <- 5 + 7. Això es pot llegir com «x obté 5 més 7». Proveu-ho ara."
+  CorrectAnswer: x <- 5 + 7
+  AnswerTests: any_of_exprs('x <- 5 + 7', 'x <- 7 + 5')
+  Hint: "Escriviu x <- 5 + 7. És important incloure un espai simple a cada costat de 
+  l'operador d'assignació, però NO poseu un espai entre «<» i «-», els símbols  que 
+  formen la fletxa."
+
+- Class: text
+  Output: "Haureu notat que l'R no ha imprès el resultat de 12 aquest cop. Quan useu
+  el operador d'assignació, l'R suposa que que no voleu veure el resultat immediatament,
+  sinó que intenteu usar el resultat per alguna altra cosa més tard."
+
+- Class: cmd_question
+  Output: "Per veure els continguts de la variable x, simplement entreu x i premeu Intro.
+  Proveu-ho ara."
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr='x')
+  Hint: "Entreu x i premeu Intro. Això imprimirà automàticament el valor de x."
+
+- Class: cmd_question
+  Output: "Ara emmagatzemeu el resultat de x - 3 en una nova variable anomenada y."
+  CorrectAnswer: y <- x - 3
+  AnswerTests: omnitest(correctExpr='y <- x - 3')
+  Hint: "Entreu y <- x - 3 i premeu Intro. Usar x - e o x-3 és preferència personal, però
+  és un bon hàbit incloure un espai als costats de l'operador d'assignació."
+
+- Class: cmd_question
+  Output: "Quin és el valor de y? Entreu y i esbrineu-ho."
+  CorrectAnswer: 'y'
+  AnswerTests: omnitest(correctExpr='y')
+  Hint: "Entreu y i premeu Intro."
+
+- Class: text
+  Output: "Crearem ara una col·lecció petita de números anomenada un vector. Qualsevol 
+  objecte que contingui dades s'anomena una estructura de dades i els vectors numèrics 
+  són el tipus més simple d'estructura de dades a l'R. De fet, fins i tot un número únic
+  es considera un vector de longitud igual a u."
+
+- Class: cmd_question
+  Output: "La forma més senzilla de crear un vector és amb la funció c(), que vol dir
+  «concatena» o «combina». Per crear un vector que contingui els números 1, 9 i 3.14
+  entreu c(1.1, 9, 3.14). Proveu-ho ara i emmagatzemeu el resultat a una variable z. "
+  CorrectAnswer: z <- c(1.1, 9, 3.14)
+  AnswerTests: omnitest(correctExpr='z <- c(1.1, 9, 3.14)')
+  Hint: "Si s'entra z <- c(1.1, 9, 3.14) s'assignarà el vector (1.1, 9 , 3.14) a una nova
+  variable anomenada z. No es requereix incloure espais senzills després de les comes 
+  al vector, però ajuda a fer el vostre codi menys atapeït i més llegible."
+
+- Class: cmd_question
+  Output: "Sempre que tingueu preguntes sobre una funció en particular, podeu accedir 
+  els fitxers integrats d'ajuda de l'R mitjançant l'ordre «?». Per exemple, si voleu més
+  informació sobre la funció c(), entreu ?c sense els parèntesis que segueixen normalment
+  al nom d'una funció. Proveu-ho."
+  CorrectAnswer: ?c
+  AnswerTests: omnitest(correctExpr='?c')
+  Hint: Entreu ?c i premeu Intro. Això us mostrarà el fitxer d'ajuda per a la funció c().
+
+- Class: cmd_question
+  Output: Entreu z per veure els seus continguts. Noteu que no hi ha comes separant
+    els valors a la sortida.
+  CorrectAnswer: z
+  AnswerTests: omnitest(correctExpr='z')
+  Hint: Entreu z i premeu Intro per veure els seus continguts.
+
+- Class: cmd_question
+  Output: Podeu combinar vectors per fer un nou vector. Creeu un nou vector que contingui
+    z, 555, i z un altre cop en aquest ordre. No assigneu aquest vector a una nova 
+    variable, de manera que podeu veure el resultat immediatament.
+  CorrectAnswer: c(z, 555, z)
+  AnswerTests: omnitest(correctExpr='c(z, 555, z)')
+  Hint: Entreu c(z, 555, z). No creeu no variable nova. Sols volem veure el resultat.
+
+- Class: cmd_question
+  Output: 'Es poden usar vectors numèrica a expressions aritmètiques. Entreu el següent
+    per veure què passa: z * 2 + 100.'
+  CorrectAnswer: z * 2 + 100
+  AnswerTests: omnitest(correctExpr='z * 2 + 100')
+  Hint: Entreu z * 2 + 100, sense assignar el resultat a una variable. El símbol «*»
+    s'usa per a la multiplicació.
+
+- Class: text
+  Output: Primer, l'R ha multiplicat cada un dels elements a z per. Després va afegir
+    100 a cada element per obtenir el resultat que veieu a dalt.
+
+- Class: text
+  Output: Altres operadors aritmètics comuns són «+»,  «-»,  «/» i  «^» (on x^2 vol dir
+    «x al quadrat»). Per obtenir l'arrel quadrada, useu la funció sqrt() i per obtenir
+    el valor absolut, useu la funció abs().
+
+- Class: cmd_question
+  Output: Obteniu l'arrel quadrada de z - 1 i assigneu-la a una nova variable anomenada my_sqrt.
+  CorrectAnswer: my_sqrt <- sqrt(z - 1)
+  AnswerTests: omnitest(correctExpr='my_sqrt <- sqrt(z - 1)')
+  Hint: Assigneu el resultat de sqrt(z- 1) a una variable anomenada my_sqrt.
+
+- Class: mult_question
+  Output: Abans que observem els continguts de la variable my_sqrt, què penseu que conté?
+  CorrectAnswer: un vector de mida 3
+  AnswerChoices: un vector de mida 3; a nombre únic (és a dir un vector de mida 1);
+    un vector de mida 0 (és a dir un vector buit)
+  AnswerTests: omnitest(correctVal='un vector de mida 3')
+  Hint: 'Penseu com R va gestionar les altres operacions «vectoritzades» element-per-element.'
+
+- Class: cmd_question
+  Output: Imprimiu els continguts de my_sqrt.
+  CorrectAnswer: my_sqrt
+  AnswerTests: omnitest(correctExpr='my_sqrt')
+  Hint: Simplement entreu my_sqrt i premeu Intro per veure el valor.
+
+- Class: text
+  Output: Com podeu haver endevinat, l'R primer va restar 1 de cada element de z, després
+    va prendre l'arrel quadrada de cada element. Això us deixa amb un vector de la mateixa
+    mida que el vector original z.
+
+- Class: cmd_question
+  Output: Creeu ara una variable nova anomenada my_div amb el valor de z dividit per my_sqrt.
+  CorrectAnswer: my_div <- z / my_sqrt
+  AnswerTests: omnitest(correctExpr='my_div <- z / my_sqrt')
+  Hint: Entreu my_div <- z / my_sqrt. No fan falta els espais als costats de «/», però 
+    millorar la llegibilitat fent que el codi no estigui tan atapeït. Al final, és un 
+    tema de preferència personal.
+
+- Class: mult_question
+  Output: Quina de les següents proposicions penseu que és veritat?
+  CorrectAnswer: El primer element de my_div és igual al primer element de z dividit
+    pel primer element de my_sqrt, i així successivament...
+  AnswerChoices: El primer element de my_div és igual al primer element de z dividit
+    pel primer element de my_sqrt, i així successivament...; my_div és un número únic (
+    és a dir un vector de mida 1); my_div és indefinit
+  AnswerTests: omnitest(correctVal='El primer element de my_div és igual al primer element de z dividit
+    pel primer element de my_sqrt, i així successivament...')
+  Hint: Penseu com R va gestionar altres operacions «vectoritzades» com ara «+» i «*».
+
+- Class: cmd_question
+  Output: Continueu i imprimiu els continguts de my_div.
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: Entreu my_div i premeu Intro per veure el seus continguts.
+
+- Class: text
+  Output: Quan hi ha dos vectors de la mateixa mida, l'R simplement realitza l'operació aritmètica
+    especificada («+», «-», «*», etc.) element-per-element. Si els vectors són de mides
+    diferents, l'R «recicla» el vector més curt fins que és de la mateixa mida que el
+    vector més llarg.
+
+- Class: text
+  Output: Quan vam fer z * 2 + 100 al nostre exemple anterior, z era un vector de mida 3,
+    però tècnicament 2 i 100 són cadascú vectors de mida 1.
+
+- Class: text
+  Output: 'Darrera el teló, l''R està «reciclant» el 2 per fer un vector de 2s i el 100 per fer
+    un vector de 100s. En altres paraules, quan demaneu a l''R que calculi z * 2 + 100,
+    el que està calculant realment és això: z + c(2, 2, 2) + c(100, 100, 100).'
+
+- Class: cmd_question
+  Output: Per veure un altre exemple de com funciona aquest «reciclatge» de vectors, proveu de
+    sumar c(1,2,3,4) i c(0,10). No us preocupeu de desar el resultat en una variable nova.
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10)')
+  Hint: Entreu c(1, 2, 3, 4) + c(0, 10) a la consola per veure com R suma dos vectors de mida 
+    diferent. No assigneu el resultat a una variable.
+
+- Class: text
+  Output: Si la mida del vector més curt no es divideix de manera exacta en la mida del vector
+    més llarg, l'R encara aplicarà el mètode de «reciclatge», però mostrarà un advertiment
+    per fer-vos saber que pot estar succeint alguna cosa estranya.
+
+- Class: cmd_question
+  Output: Proveu c(1, 2, 3, 4) + c(0, 10, 100) com a exemple.
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10, 100)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10, 100)')
+  Hint: Entreu c(1, 2, 3, 4) + c(0, 10, 100) per veure com l'R gestiona la suma de dos vectors,
+    quan el vector més curt no es divideix de forma exacta dins del vector més llarg. 
+   No us preocupeu d'assignar el resultat a una variable.
+
+- Class: text
+  Output: Abans d'acabar aquesta lliçó, m'agradaria mostrar-vos un parell de trucs que estalvien temps.
+
+- Class: text
+  Output: Abans, en aquesta lliçó, havíeu calculat z + 2 + 100. Suposem que heu fet un error i que volíeu afegir 1000 en comptes de 100. Podríeu o bé tornar a entrar l'expressió, o...
+
+- Class: cmd_question
+  Output: En molts entorns de programació la fletxa amunt recorrerà la història d'ordres prèvies. Proveu de prémer la tecla fletxa amunt al teclat fins que obteniu aquesta ordre (z * 2 + 100), i a continuació canvieu 100 per 1000 i premeu Intro. Si la fletxa amunt no funciona, simplement entreu l'ordre correcta.
+  CorrectAnswer: z * 2 + 1000
+  AnswerTests: omnitest(correctExpr='z * 2 + 1000')
+  Hint: Si el vostre entorn no dóna suport a la fletxa amunt, simplement entre l'ordre correcte z + 2 + 100 per continuar.
+
+- Class: text
+  Output: Finalment, pretenem que voldríeu veure els continguts d'una variable que heu creat abans, però no recordeu si l'heu anomenada my_div o myDiv. Podríeu provar les dues i veure què funciona, o...
+
+- Class: cmd_question
+  Output: Podeu entrar les dues primeres lletres del nom de la variable, i després prémer la tecla de tabulació (potser més d'un cop). La major part dels entorns de programació proveiran una llista de variables que heu creat que comencin amb «my». Això s'anomena autocompletar i potser força pràctic quan teniu moltes variables al vostre entorn de treball. Proveu-ho. (Si no us funciona l'autocompletat, simplement entreu my_div i premeu Intro.)
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: Si el vostre entorn de programació no dóna suport a l'autocompletat, simplement entreu my_div i premeu Intro per continuar.
+
+- Class: mult_question
+  Output: "Us agradaria rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

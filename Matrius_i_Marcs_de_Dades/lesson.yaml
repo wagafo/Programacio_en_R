@@ -1,0 +1,278 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Matrius i Marcs de Dades
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: En aquesta lliçó cobrirem el tema de matrius i data frames (marcs
+    de dades). Ambdós representen tipus de dades «rectangulars», cosa que vol
+    dir que s'usen per emmagatzemar taules de dades, amb files i columnes.
+
+- Class: text
+  Output: La principal diferència, com veureu, és que les matrius sols poden
+    contenir una única classe de dades, mentre que els marcs de dades poden
+    contenir moltes classes diferents de dades.
+
+- Class: cmd_question
+  Output: Creem un vector contenint els números 1 a 20 usant l'operador «:»
+    Emmgatzemeu el resultat a una variable anomenada my_vector.
+  CorrectAnswer: my_vector <- 1:20
+  AnswerTests: omnitest(correctExpr='my_vector <- 1:20')
+  Hint: Vau aprendre sobre l'operador «:» a la lliçó sobre seqüències. Si
+    volíeu crear un vector contenint els nombres 1, 2 i 3 (en aquest ordre),
+    podíeu usar o bé c(1, 2, 3) o 1:3. En aquest cas, volem els números 1 a
+    20 emmagatzemats en una variable anomenada my_vector. Recordeu també que
+    no us cal la funció c() quan useu «:».
+
+- Class: cmd_question
+  Output: Visualitzeu els continguts del vector que heu acabat de crear.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Entreu my_vector per veure els continguts.
+
+- Class: cmd_question
+  Output: La funció dim() ens diu les «dimensions» d'un objecte. Què passa
+    si fem dim(my_vector)? Proveu-ho.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Simplement entreu dim(my_vector) per veure què passa.
+
+- Class: cmd_question
+  Output: Clarament, això no és massa útil! Atès que my_vector és un vector,
+    no té un atribut «dim» (així que no és més que NULL), però podem saber
+    la seva longitud usant la funció length(). Proveu això ara.
+  CorrectAnswer: length(my_vector)
+  AnswerTests: omnitest(correctExpr='length(my_vector)')
+  Hint: Entreu length(my_vector) per veure la longitud del vector que acabeu
+    de crear.
+
+- Class: cmd_question
+  Output: D'acord! Això és el volíem. Però què passa si li donem a my_vector
+    un atribut «dim»? Prove-m'ho. Entreu dim(my_vector) <- c(4, 5).
+  CorrectAnswer: dim(my_vector) <- c(4, 5)
+  AnswerTests: omnitest(correctExpr='dim(my_vector) <- c(4, 5)')
+  Hint: Entreu dim(my_vector) <- c(4, 5) per donar-li a my_vector un
+    atribut «dim» 
+
+- Class: text
+  Output: Està bé si aquesta últim ordre us ha semblat una mica estranya.
+    Així ha de ser! La funció dim() us deixa obtenir o establir l'atribut
+    «dim» per a un objecte R. En aquest cas, hem assignat el valor
+    c(4, 5) a l'atribut «dim» de my_vector.
+
+- Class: cmd_question
+  Output: Useu dim(my_vector) per confirmar que hem establert l'atribut
+    «dim» correctament.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Simplement entreu dim(my_vector) per assegurar que l'atribut
+    «dim» s'ha establert.
+
+- Class: cmd_question
+  Output: Una altra manera de veure això és cridant a la funció
+    attributes() sobre my_vector. Proveu-ho.
+  CorrectAnswer: attributes(my_vector)
+  AnswerTests: omnitest(correctExpr='attributes(my_vector)')
+  Hint: L'ordre attributes(my_vector) us mostrarà tots els atributs per
+    a l'objecte my_vector.
+
+- Class: text
+  Output: De la mateixa manera que a la classe de matemàtiques, quan estem
+    tractant amb un objecte de dos dimensions (penseu en una taula
+    rectangular), el primer número és el nombre de files i el segon és
+    el nombre de columnes. Consegüentment, simplement li hem donat a
+    my_vector 4 files i 5 columnes.
+
+- Class: cmd_question
+  Output: Però, espereu! Això no sembla que continuï sent un vector. Bé,
+    no ho és. Ara és una matriu. Mireu els continguts de my_vector ara per
+    veure quin aspecte té.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Entreu my_vector per veure els seus continguts.
+
+- Class: cmd_question
+  Output: Ara, confirmem que és realment una matriu usant la funció class().
+    Entreu class(my_vector) per veure el que volem dir.
+  CorrectAnswer: class(my_vector)
+  AnswerTests: omnitest(correctExpr='class(my_vector)')
+  Hint: Entreu class(my_vector) per veure la classe de my_vector.
+
+- Class: cmd_question
+  Output: Ara ho hem vist, my_vector és ara una matriu. L'hauríem de desar
+    en una nova variable que ens ajudi a recordar el que és. Emmagatzemeu el
+    valor de my_vector en una variable nova amb nom my_matrix.
+  CorrectAnswer: my_matrix <- my_vector
+  AnswerTests: omnitest(correctExpr='my_matrix <- my_vector') 
+  Hint: Atès que no podem simplement canviar el nom de la nostra variable
+    my_vector, assignarem el seu valor a una variable nova amb
+    my_matrix <- my_vector.
+
+- Class: text
+  Output: L'exemple que hem usat fins ara tenia l'objectiu d'il·lustrar el
+    fet que una matriu és simplement un vector atòmic amb un atribut de
+    dimensió. La funció matrix() és un mètode més directe de crear la mateixa
+    matriu.
+
+- Class: cmd_question
+  Output: Mostreu el fitxer d'ajuda per a la funció matrix() usant la funció
+    «?».
+  CorrectAnswer: ?matrix
+  AnswerTests: omnitest(correctExpr='?matrix')
+  Hint: L'ordre ?matrix farà això.
+
+- Class: cmd_question
+  Output: Mireu ara la documentació per a la funció matrix i mireu si podeu
+    esbrinar com crear una matriu que contingui els mateixos números (1-20)
+    i dimensió (4 files i 5 columnes) amb l'ús de la funció matrix().
+    Emmagatzemeu el resultat a una variable anomenada my_matrix2.
+  CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
+  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
+  Hint: Crideu la funció matrix() amb 3 arguments --1:20, el nombre de files i
+    i el nombre de columnes. Assegureu-vos d'especificar els arguments amb
+    els seus noms correctes i emmagatzemeu el resultat a my_matrix2 (no a
+    my_matrix).
+
+- Class: cmd_question
+  Output: Finalment, confirmem que my_matrix y my_matrix2 són realment
+    idèntiques. La funció identical() us dirà si els seus dos primers
+    arguments són els mateixos. Proveu-ho.
+  CorrectAnswer: identical(my_matrix, my_matrix2)
+  AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
+  Hint: Si no teniu seguretat sobre aquesta pregunta, comproveu la documentació
+    per a la funció identical() usant la funció «?».
+
+- Class: text
+  Output: Imagineu ara que els números de la nostra taula representen
+    algunes mesures d'un experiment clínic, o cada fila representa un pacient
+    i cada columna representa una variable per a la qual s'ha pres una mesura.
+
+- Class: text
+  Output: Podríem voler etiquetar les files, de manera que podem saber quins
+    números pertanyen a cada pacient a l'experiment. Una manera de fer això
+    és afegir una columna a la matriu, que contingui els noms de les quatre
+    persones.
+
+- Class: cmd_question
+  Output: Comencem creant un vector de caràcters que contingui els noms dels
+    nostres pacients -- Bill, Gina, Kelly i Sean. Recordeu que les dobles
+    cometes li diuen a l'R que quelcom és una cadena de caràcters.
+    Emmagatzemeu el resultat en una variable anomenada patients. 
+  CorrectAnswer: patients <- c("Bill", "Gina", "Kelly", "Sean")
+  AnswerTests: omnitest(correctExpr='patients <- c("Bill", "Gina", "Kelly", "Sean")')
+  Hint: Assegureu-vos de posar en majúscula el primer caràcter de cada nom
+    i emmagatzemeu el resultat en una variable anomenada patients. A més,
+    no barregeu l'ordre dels pacients! Això seria un desastre!
+
+- Class: cmd_question
+  Output: Ara usarem la funció cbind() per «combinar columnes». No us
+    preocupeu d'emmagatzemar el resultat en una nova variable. Simplement
+    crideu cbind() amb dos arguments -- el vector patients i my_matrix.
+  CorrectAnswer: cbind(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='cbind(patients, my_matrix)')
+  Hint: Entreu cbind(patients, my_matrix) per afegir els noms dels nostres
+    pacients a la matriu de nombres.
+
+- Class: text
+  Output: Hi ha quelcom sospitós al nostre resultat! Sembla que la combinació
+    del vector de caràcters amb la nostra matriu de nombres ha causat que
+    tot estigui envoltat de cometes dobles. Això vol dir que ens ha quedat
+    una matriu de cadenes de caràcter, cosa que no és bona.
+
+- Class: text
+  Output: Si recordeu el principi d'aquesta lliçó, havíem comentat que les
+    matrius sols poden tenir UN tipus de dades. En conseqüència, quan hem
+    intentat combinar un vector de caràcters amb una matriu numèrica, l'R
+    ha estat obligat a «forçar» els nombres a ser caràcters, per això les
+    cometes dobles.
+
+- Class: text
+  Output: Això s'anomena «forçament implícit», perquè no ho hem demanat.
+    Simplement ha passat. Però perquè no ha convertit l'R els noms dels
+    nostres pacients a nombres? Penseu quina pot ser la raó d'això.
+
+- Class: cmd_question
+  Output: Així, encara ens queda la pregunta sobre com incloure els noms
+    dels nostres pacients a la taula sense destruir la integritat de les
+    nostres dades numèriques. Proveu el següent
+    -- my_data <- data.frame(patients, my_matrix)
+  CorrectAnswer: my_data <- data.frame(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='my_data <- data.frame(patients, my_matrix)')
+  Hint: Entreu my_data <- data.frame(patients, my_matrix), així podem explorar
+    què passarà.
+
+- Class: cmd_question
+  Output: Visualitzeu ara els continguts de my_data per veure que hem obtingut.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Entreu my_data per veure els seus continguts.
+
+- Class: text
+  Output: Sembla que la funció data.frame() ens va permetre emmagatzemar
+    el nostre vector de noms junt amb la nostra matriu de nombre. Això
+    era exactament el que volíem!
+
+- Class: text
+  Output: A darrera del teló, la funció data.frame() agafa qualsevol nombre
+    d'arguments i retorna un objecte únic de classe «data.frame» que està
+    composat dels objectes originals.
+
+- Class: cmd_question
+  Output: Confirmem això cridant la funció class() sobre el marc de dades
+    que acabem de crear.
+  CorrectAnswer: class(my_data)
+  AnswerTests: omnitest(correctExpr='class(my_data)')
+  Hint: La funció class() pren un sols argument -- l'objecte del qual voleu
+    determinar la seva classe.
+
+- Class: text
+  Output: També és possible assignar noms a les files i columnes individuals
+    d'un marc de dades, cosa que presenta una altra via possible de determinar
+    quina fila de valor a la nostra taula pertany a cada pacient.
+
+- Class: text
+  Output: Tanmateix, atès que ja hem resolt aquest problema, intentem resoldre
+    un problema diferent assignant nom a les columnes del nostre marc de dades
+    de manera que sabem quin tipus de mesurament representa cada columna.
+
+- Class: cmd_question
+  Output: Atès que tenim sis columnes (incloent els noms dels pacients), ens
+    caldrà crear primer un vector que contingui un element per a cada columna.
+    Creeu un vector de caràcters anomenat cnames que contingui els valors
+    següents (en ordre) -- "pacient", "edat", "pes", "pa", "rating", "test".
+  CorrectAnswer: cnames <- c("pacient", "edat", "pes", "pa", "rating", "test")
+  AnswerTests: omnitest(correctExpr='cnames <- c("pacient", "edat", "pes", "pa", "rating", "test")')
+  Hint: Assegureu-vos que els noms estan en minúscules envoltats per cometes
+    dobles, i separats per comes. No us oblideu de la funció c().
+
+- Class: cmd_question
+  Output: Ara, useu la funció colnames() per establir l'atribut «colnames»
+    per al nostre marc de dades. Això és semblant a la manera que havíem usat
+    la funció dim() abans a aquesta lliçó.
+  CorrectAnswer: colnames(my_data) <- cnames
+  AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
+  Hint: Proveu colnames(my_data) <- cnames.
+
+- Class: cmd_question
+  Output: Mirem si això ha permès fer la feina. Imprimiu els continguts
+    de my_data.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Imprimiu a la pantalla els continguts de my_data.
+
+- Class: text
+  Output: En aquesta lliçó heu après els elements bàsics de dues estructures
+    de dades comunes i molt importants -- matrius i marcs de dades. Hi ha
+    moltes més coses a aprendre i cobrirem temes més avançats, particularment
+    respecte a marcs de dades, a lliçons futures.
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""
+

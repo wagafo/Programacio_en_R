@@ -1,0 +1,220 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: vapply i tapply
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.11
+
+- Class: text
+  Output: "A l'última lliçó, heu après sobre sobre els dos membres més
+    importants de la família de funcions *apply de R: lapply() i sapply().
+    Totes dues prenen una llista com entrada, i apliquen una funció a cada
+    element de la llista, a continuació combinen i retornen el resultat.
+    lapply() sempre retorna una llista, mentre que sapply() intent simplificar
+    el resultat."
+
+- Class: text
+  Output: A aquesta lliçó aprendreu a usar vapply() i tapply(), cadascuna
+    de les quals s'utilitza per a un propòsit molt específic de la metodologia
+    Divideix-Aplica-Combina. Per motius de consistència, farem servir el
+    mateix conjunt de dades que vam usar a la lliçó «lapply i sapply».
+
+- Class: text
+  Output: "El conjunt de dades Flags del dipòsit UCI Machine Learning Repository
+    conté diverses nacions i les seves banderes. Es pot trobar més informació
+    aquí: http://archive.ics.uci.edu/ml/datasets/Flags"
+
+- Class: text
+  Output: Hem desar les dades a una variable anomenada flags. Si ha passat un
+    temps des que heu completat la lliçó «lapply i sapply», potser voleu
+    tornar a familiaritzar-vos amb les dades usant les funcions dim(), head(),
+    str() i summary() quan retorneu a la línia d'ordres (>). També podeu
+    entrar viewinfo() a la línia d'ordres per mostrar alguna documentació
+    sobre el conjunt de dades. Anem a començar!
+
+- Class: cmd_question
+  Output: Com heu vist a l'última lliçó, la funció unique() retorna un
+    vector de valors únics contingut a l'objecte que se li passa. En
+    conseqüència, sapply(flags, unique) retorna una llista contenint un
+    vector de valors únics per a cada columna del conjunt de dades flags.
+    Proveu-ho ara un altre cop.
+  CorrectAnswer: sapply(flags, unique)
+  AnswerTests: omnitest(correctExpr='sapply(flags, unique)')
+  Hint: Useu sapply(flags, unique) per retornar una llista contenint un
+    vector de valors únics per a cada columna del conjunt de dades flags.
+
+- Class: text
+  Output: Què passaria si us haguéssiu oblidat com funciona unique() i
+    penséssiu incorrectament que retorna el *nombre* de valors únics
+    continguts a l'objecte que se li ha passat? Aleshores potser hauríeu
+    esperat incorrectament que sapply(flags, unique) retornaria un vector
+    numèric, atès que cada element de la llista retornada contindria un
+    nombre únic i sapply() i sapply podria simplificar el resultat a un
+    vector.
+
+- Class: text
+  Output: Quan treballeu interactivament (a la línia d'ordres), això no
+    és un gran problema, atès que veieu el resultat immediatament i
+    reconeixereu ràpidament el vostre error. Tanmateix, quan treballeu
+    de manera no interactiva (per exemple escrivint les vostres pròpies
+    funcions), un error d'aquest tipus pot no ser detectat i causar resultats
+    incorrectes més tard. Per aquesta raó potser voleu posar més cura i és
+    aquí on vapply() és útil.
+
+- Class: text
+  Output: Mentre que sapply() intent «endevinar» el format correcte del
+    resultat, vapply() us permet especificar-lo explícitament. Si el resultat
+    no concorda amb el format que especifiqueu, vapply() mostrarà un error,
+    causant que l'operació s'aturi. Això pot prevenir problemes significatius
+    en el vostre codi que podrien estar causats per rebre resultats
+    inesperats de sapply().
+
+- Class: cmd_question
+  Output: Proveu vapply(flags, unique, numeric(1)), cosa que vol dir que
+    espereu que cada element del resultat serà un vector numèric de
+    longitud igual a 1. Atès que aquest NO és en realitat el cas, REBREU UN
+    ERROR. Un cop que veieu l'error, entreu ok() per continuar amb la
+    pregunta següent.
+  CorrectAnswer: ok()
+  AnswerTests: omnitest(correctExpr="ok()")
+  Hint: Entreu vapply(flags, unique, numeric(1)), a continuació entreu ok()
+    per continuar amb la pregunta següent.
+
+- Class: cmd_question
+  Output: Recordeu de la lliçó anterior que sapply(flags, class) us retornarà
+    un vector de caràcters contenint la classe de cada columna al conjunt
+    de dades. Proveu això un altre cop per veure el resultat.
+  CorrectAnswer: sapply(flags, class)
+  AnswerTests: omnitest(correctExpr="sapply(flags, class)")
+  Hint: Entreu sapply(flags, class) per obtenir un vector de caràcters de
+    classes de les columnes.
+
+- Class: cmd_question
+  Output: Si volem ser explícits sobre el format del resultat que esperem,
+    podem usar vapply(flags, class, character(1)). L'argument «character(1)»
+    li diu a l'R que esperem que la funció class retornarà un vector de
+    caràcters de longitud 1 quan s'aplica a CADA columna del conjunt de
+    dades flags. Proveu-ho ara.
+  CorrectAnswer: vapply(flags, class, character(1))
+  AnswerTests: omnitest(correctExpr="vapply(flags, class, character(1))")
+  Hint: Useu vapply(flags, class, character(1)) per retornar un vector
+    de caràcters de classes de columnes.
+
+- Class: text
+  Output: Noteu que considerant que la nostra expectativa era correcta (és
+    a dir character(1)), el resultat de vapply() és idèntic al resultat de
+    sapply() -- un vector de caràcters de classes de columnes.
+
+- Class: text
+  Output: Potser penseu que vapply() és més «segura» que sapply(), ja que us
+    requereix especificar el format de la sortida d'avançada, en comptes
+    de simplement permetre l'R «endevinar» el que volíeu. Addicionalment,
+    vapply() pot ser més ràpida que sapply() per a conjunts de dades grans.
+    Tanmateix, quan es va l'anàlisi de dades interactivament (a la línia
+    d'ordres), sapply() us estalvia una mica d'escriptura i serà en general
+    suficientment bona.
+
+- Class: text
+  Output: Com a analista de dades, molt sovint voldreu dividir les vostres
+    dades en grups basats en el valor d'alguna variable, i a continuació
+    aplicar una funció als membres de cada grup. La pròxima funció que
+    introduirem, tapply(), fa exactament això.
+
+- Class: cmd_question
+  Output: Useu ?tapply per veure la documentació.
+  CorrectAnswer: ?tapply
+  AnswerTests: any_of_exprs('?tapply', 'help(tapply)')
+  Hint: Mireu el fitxer d'ajuda amb ?tapply.
+
+- Class: cmd_question
+  Output: La variable «landmass» del nostre conjunt de dades agafa valors
+    enters entre 1 i 6, cadascú dels quals representa una part diferent del
+    món. Useu table(flags$landmass) per veure quantes banderes/quants països
+    cauen a cada grup.
+  CorrectAnswer: table(flags$landmass)
+  AnswerTests: omnitest(correctExpr="table(flags$landmass)")
+  Hint: Useu table(flags$landmass) per veure quantes banderes/quants
+    països cauen a cada grup.
+
+- Class: cmd_question
+  Output: La variable «animate» al nostre conjunt de dades agafa el valor
+    1 si la bandera d'un país conté una imatge animada (per exemple una
+    àguila, un arbre, una mà humana) i 0 en cas contrari. Useu
+    table(flags$animate) per veure quantes banderes contenen una imatge
+    animada.
+  CorrectAnswer: table(flags$animate)
+  AnswerTests: omnitest(correctExpr="table(flags$animate)")
+  Hint: Useu table(flags$animate) per veure quantes banderes contenen una
+    imatge animada.
+
+- Class: text
+  Output: Això ens dius que 39 banderes contenen un objecte animat
+    (animate = 1) i 155 no (animate = 0).
+
+- Class: cmd_question
+  Output:  Si calculeu la mitjana aritmètica d'un conjunt de 0 i 1, obteniu
+    la proporció de 1. Useu tapply(flags$animate, flags$landmass, mean) per
+    aplicar la funció mean a la variable «animate» de manera separada per
+    a cada una dels sis grups classificats amb la variable «landmass»,
+    obtenint així la proporció de banderes que contenen una imatge animada
+    DINS de cada grup de landmass.
+  CorrectAnswer: tapply(flags$animate, flags$landmass, mean)
+  AnswerTests: omnitest(correctExpr="tapply(flags$animate, flags$landmass, mean)")
+  Hint: tapply(flags$animate, flags$landmass, mean) ens dirà la proporció de
+    banderes que contenen una imatge animada dins de cada grup landmass.
+
+- Class: text
+  Output: El primer grup landmass (landmass = 1) correspon a Amèrica del Nord
+    i conté la proporció més alta de banderes amb una imatge animada (0.4194).
+
+- Class: cmd_question
+  Output: Similarment, podem obtenir un resum dels valors de la població
+    (arrodonit al milió d'habitants) per als països amb i sense el color
+    vermell a la seva bandera amb tapply(flags$population, flags$red, summary).
+  CorrectAnswer: tapply(flags$population, flags$red, summary)
+  AnswerTests: omnitest(correctExpr="tapply(flags$population, flags$red, summary)")
+  Hint: Podeu veure un resum de les poblacions per a països amb i sense el
+    color vermell a les seves banderes amb
+    tapply(flags$population, flags$red, summary). 
+
+- Class: mult_question  
+  Output: Quina és la mediana de la població (en milions) per a països *sense*
+    el color vermell a les seves banderes?
+  AnswerChoices: 9.0; 4.0; 27.6; 3.0; 22.1; 0.0
+  CorrectAnswer: 3.0
+  AnswerTests: omnitest(correctVal= '3.0')
+  Hint: Useu el vostre resultat de l'última pregunta. Recordeu que red = 0
+    significa que el color vermell NO està present a la bandera d'un país.
+
+- Class: cmd_question
+  Output: Finalment, useu el mateix enfoc per mirar a un resum dels valors
+    de la població per a cada uns del sis grups definits a la variable landmass.
+  CorrectAnswer: tapply(flags$population, flags$landmass, summary)
+  AnswerTests: omnitest(correctExpr="tapply(flags$population, flags$landmass, summary)")
+  Hint: "Podeu veure un resum de les poblacions de cada un dels grups
+    definits al variable landmass cridant tapply() amb tres arguments: 
+    flags$population, flags$landmass, i summary."
+
+- Class: mult_question  
+  Output: Quina és la població màxima (en milions) per al quart grup definit
+    a la variable landmass (Africa)?
+  AnswerChoices: 56.00; 1010.0; 119.0; 5.00; 157.00
+  CorrectAnswer: 56.00
+  AnswerTests: omnitest(correctVal= '56.00')
+  Hint: Useu el vostre resultat de l'última pregunta.
+
+- Class: text  
+  Output: En aquesta lliçó, heu après com usar vapply() com una alternativa
+    més segura que sapply(), cosa que pot ser molt útil en escriure funcions
+    pròpies. També heu après a usar tapply() per dividir les vostres dades
+    en grups basats en el valor d'alguna variable, i després aplicar una
+    funció a cada grup. Aquestes funcions seran útils en la vostra preparació
+    per arribar a ser millor a l'anàlisi de dades.
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

@@ -1,0 +1,201 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Primera Mirada a les Dades
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.11
+
+- Class: text
+  Output: Sempre que treballeu amb un nou conjunt de dades, el primer que
+    heu de fer és donar-li una ullada. Quin format tenen les dades? Quines
+    són les seves dimensions? Quins són els noms de les variables? Com estan
+    emmagatzemades les variables? Hi ha dades absents? Hi ha algun problema
+    amb les dades?
+
+- Class: text
+  Output: Aquesta lliçó us ensenyarà com respondre a aquestes preguntes i
+    us mostrarà noves funcions integrades a l'R. Estarem usant una conjunt
+    de dades del Departament d'Agricultura dels Estats Units
+    (http://plants.usda.gov/adv_search.html).
+
+- Class: cmd_question
+  Output: Les dades estan emmagatzemades a una variable anomenada plants.
+    Entreu ls() per fer una llista de les variables al vostre espai de treball,
+    entre les quals hauria d'haver-hi plants.
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExpr='ls()')
+  Hint: Useu ls() per fer una llista de les variables al vostre espai de
+    treball.
+
+- Class: cmd_question
+  Output: Comenceu verificant la classe de la variable plants amb class(plants).
+    Això ens donarà una pista sobre l'estructura general de les dades.
+  CorrectAnswer: class(plants)
+  AnswerTests: omnitest(correctExpr='class(plants)')
+  Hint: Useu class(plants) per comprovar la classe de la variable plants.
+
+- Class: text
+  Output: És molt comú que les dades estiguin emmagatzemades a un marc de
+    dades. És la classe predeterminada per a les dades quan s'entren a l'R
+    usant funcions com ara read.csv() i read.table(), que aprendreu a d'altres
+    lliçons. 
+
+- Class: cmd_question
+  Output: Atès que el conjunt de dades està desat en un marc de dades, sabem
+    que és rectangular. En altres paraules, té dues dimensions (files i
+    columnes) i s'ajusta perfectament a una taula o full de càlcul. Useu
+    dim(plants) per veure exactament amb quantes files i columnes estem
+    tractant.
+  CorrectAnswer: dim(plants)
+  AnswerTests: omnitest(correctExpr='dim(plants)')
+  Hint: Useu dim(plants) per veure les dimensions exactes del conjunt de
+    dades plants.
+
+- Class: text
+  Output: El primer número que veieu (5166) és el nombre de files
+    (observacions) i el segon número (10) és el nombre de columnes
+    (variables).
+
+- Class: cmd_question
+  Output: També podeu usar nrow(plants) per veure sols el nombre de files.
+    Proveu-lo.
+  CorrectAnswer: nrow(plants)
+  AnswerTests: omnitest(correctExpr='nrow(plants)')
+  Hint: Useu nrow(plants) per veure sols el nombre de files.
+
+- Class: cmd_question
+  Output: ... I ncol(plants) per veure sols el nombre de columnes.
+  CorrectAnswer: ncol(plants)
+  AnswerTests: omnitest(correctExpr='ncol(plants)')
+  Hint: Useu ncol(plants) per veure sols el nombre de columnes.
+
+- Class: cmd_question
+  Output: Si teniu curiositat per veure quant d'espai el conjunt de dades
+    està ocupant a la memòria, podeu usar object.size(plants).
+  CorrectAnswer: object.size(plants)
+  AnswerTests: omnitest(correctExpr='object.size(plants)')
+  Hint: object.size(plants) us dirà quanta memòria ocupa el marc de dades
+    plants.
+
+- Class: cmd_question
+  Output: Ara que tenim una idea de la forma i la mida del conjunt de dades,
+    anem a fer-nos idea del que hi ha a dins. names(plants) ens retornarà
+    un vector de caràcters dels noms de les columnes (és a dir, de les
+    variables). Proveu-ho.
+  CorrectAnswer: names(plants)
+  AnswerTests: omnitest(correctExpr='names(plants)')
+  Hint: names(plants) ens retornarà un vector de caràcters dels noms de
+    les columnes (és a dir de les variables).
+
+- Class: text
+  Output: Hem aplicat noms força descriptius (en anglès) a les variables
+    d'aquest conjunt de dades, però això no serà sempre així. Un pas lògic
+    següent és mirar les dades reals. Tanmateix, el nostre conjunt de
+    dades conté més de 5000 observacions (files), de manera que no és
+    pràctic visualitzar tot a l'hora.
+
+- Class: cmd_question
+  Output: La funció head() ens permet visualitzar la part superior del
+    conjunt de dades. Prove-ho amb sols un argument.
+  CorrectAnswer: head(plants)
+  AnswerTests: omnitest(correctExpr='head(plants)')
+  Hint: head(plants) ens mostrarà la part de més a dalt del conjunt de dades.
+
+- Class: text
+  Output: Dediqueu una estona a mirar i entendre la sortida de dalt. Cada fila
+    està etiquetada amb el número d'observació i cada columna amb el nom
+    de la variable. La vostra pantalla no és suficientment ampla per
+    visualitzar les 10 columnes una al costat de l'altra, en aquest cas
+    l'R mostra tantes columnes com pot a cada línia abans de continuar a
+    la línia següent.
+
+- Class: cmd_question
+  Output: De manera predeterminada, head() mostra les primeres sis files
+    de les dades. Podeu modificar aquest comportament passant com a segon
+    argument el nombre de files que us agradaria visualitzar. Useu
+    head() per visualitzar les primeres 10 files de plants.
+  CorrectAnswer: head(plants, 10)
+  AnswerTests: omnitest(correctExpr='head(plants, 10)')
+  Hint: head(plants, 10) us mostrarà les primeres 10 files del conjunt de dades.
+
+- Class: cmd_question
+  Output: El mateix s'aplica quan s'usa tail() per veure el final del
+    conjunt de dades. Useu tail() per veure les últimes 15 files.
+  CorrectAnswer: tail(plants, 15)
+  AnswerTests: omnitest(correctExpr='tail(plants, 15)')
+  Hint: tail(plants, 15) us mostrarà les últimes 15 files del conjunt de dades.
+
+- Class: cmd_question
+  Output: Després de previsualitzar la part superior i inferior de les nostres
+    dades, probablement heu notat molts NA, que són els marcadors de l'R per
+    a valors absents. Useu summary(plants) per tenir una millor idea sobre
+    com es distribueix cada variable i la importància dels valors absents.
+  CorrectAnswer: summary(plants)
+  AnswerTests: omnitest(correctExpr='summary(plants)')
+  Hint: Proveu summary(plants) per veure com es distribueix cada variable
+    i quants valors absents tenim.
+
+- Class: text
+  Output: summary() proveeix una sortida diferent per a cada variable,
+    depenent de la seva classe. Per a dades numèric, com ara Precip_Min,
+    summary() mostra el mínim, el 1er quartil, la mediana, la mitjana,
+    el 3er quartil i el màxim. Aquests valors us ajuden a entendre com es
+    distribueixen les dades.
+
+- Class: text
+  Output: Per a variables categòriques (anomenades variables «factor» a l'R),
+    summary() mostre el nombre de cops cada valor (o «level», és a dir nivell)
+    apareix a les dades. Per exemple, cada valor de Scientific Name sols apareix
+    un cop, atès que es únic per a cada planta. Contràriament, el resum per a
+    Duration (també una variable factor o categòrica), ens diu que el nostre
+    conjunt de dades conté 3031 plantes Perennial, 682 plantes Annual, etc.
+
+- Class: cmd_question
+  Output: Podeu veure que l'R ha truncat el reum per Active_Growth_Period
+    incloent una categoria genèrica «Other». Atès que és una variable
+    categòrica/factor, podeu veure quants cops apareix realment cada valor
+    a les dades amb table(plants$Active_Growth_Period).
+  CorrectAnswer: table(plants$Active_Growth_Period)
+  AnswerTests: omnitest(correctExpr='table(plants$Active_Growth_Period)')
+  Hint: table(plants$Active_Growth_Period) mostrarà el nombre per a cada
+    nivell de la variable factor.
+
+- Class: text
+  Output: Cada una de les funcions que hem introduït fins ara compleix un
+    paper d'ajudar-vos a entendre millor l'estructure de les vostres dades.
+    Tanmateix, hem deixat el millor per al final...
+
+- Class: cmd_question
+  Output: Potser la funcío més útil i més concisa per entendre l'e*str*uctura
+    de les vostres dades és str(). Proveu-la ara.
+  CorrectAnswer: str(plants)
+  AnswerTests: omnitest(correctExpr='str(plants)')
+  Hint: Useu str(plants) per mirar l'estructura de les vostres dades.
+
+- Class: text
+  Output: La bellesa de str() és que combina moltes de les funcionalitats
+    de les altres funcions que hem vist fins ara, tot en un format concís
+    i llegible. A la part superior, es diu que la classe de plants és
+    «data.frame» i que té 5166 observacions i 10 variables. Després ens
+    dóna el nom i la classe de cada variable, a més d'una previsualització
+    dels seus continguts.
+
+- Class: text
+  Output: str() és en realitat una funció molt general que podeu usar a
+    molts objectes de R. Sempre que vulgueu entendre l'estructura d'alguna
+    cosa (un conjunt de dades, una funció, etc.), str() és un bon lloc per
+    començar.
+
+- Class: text
+  Output: En aquesta lliçó, heu après com obtenir una idea de l'estructura
+    i contingut de un nou conjunt de dades usant una col·lecció de funcions
+    simples i útils. Dedicar un temps per fer això de bon començament us
+    estalvia temps i frustracions més tard en la vostra anàlisi.
+ 
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

@@ -1,0 +1,190 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Sequencies de Numeros
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: En aquesta lliçó aprendreu com crear seqüències de números amb R.
+
+- Class: cmd_question
+  Output: La manera més senzilla de crear una seqüència de números amb l'R és
+    usar l'operador `:`. Entreu 1:20 per veure com funciona.
+  CorrectAnswer: '1:20'
+  AnswerTests: omnitest(correctExpr='1:20')
+  Hint: Entreu 1:20 sense espais. Assegureu-vos d'usar el doble punt i no el
+    punt i coma.
+
+- Class: cmd_question
+  Output: Això ens va donar tots els enters entre (i incloent-hi) 1 i 20. També
+    ho podríem usar per crear una seqüència de nombres reals. Per exemple
+    proveu pi:10.
+  CorrectAnswer: pi:10
+  AnswerTests: omnitest(correctExpr='pi:10')
+  Hint: Entreu pi:10 per veure què passa. Recordeu que pi és una constant
+    predefinida que pren el valor 3.1415...
+
+- Class: text
+  Output: El resultat és un vector de nombres reals que comença amb pi
+    (3.142...) i es va incrementant de 1. El límitde 10 mai no s'assoleix
+    atès que el següent valor a la nostra seqüència seria més gran que 10.
+
+- Class: cmd_question
+  Output: 'Què passa si fem 15:1? Proveu-ho i esbrineu-ho.'
+  CorrectAnswer: '15:1'
+  AnswerTests: omnitest(correctExpr='15:1')
+  Hint: Entreu 15:1 I premeu Intro.
+
+- Class: text
+  Output: Ha contat cap enrere en increments de 1. No és probable que vulguem
+    aquest comportament, però es bo saber que ho podríem fer.
+
+- Class: text
+  Output: "Recordeu que si teniu preguntes sobre una funció particular R,
+    podeu accedir a la seva documentació amb un signe d'interrogant seguit
+    del nom de la funció: ?nom_de_la_funció_aquí. Tanmateix, en el cas d'un
+    operador com el doble punt usat a dalt, heu d'incloure el símbol en
+    cometes cap enrere, d'aquesta manera: ?`:`. (NOTA: La generació de la
+    cometa enrere depèn del tipus de teclat de l'ordinador. En els teclats
+    per a llengua catalana o castellana, és l'accent greu i s'aconsegueix
+    entrant aquest accés i prement l'espaiador. Si no ho podeu produir també
+    podeu usar les cometes normals.)"
+
+- Class: cmd_question
+  Output: Obteniu ara la documentació per a `:`.
+  CorrectAnswer: ?`:`
+  AnswerTests: any_of_exprs('?`:`', "?':'", '?":"')
+  Hint: "Per veure la documentació per a un símbol com l'operador doble punt,
+    heu d'usar les cometes enrere (o cometes normals). Així l'R pot saber
+    que no esteu intentant usar el símbol a la línia d'ordres. Es veu
+    d'aquesta manera: ?`:`. No us oblideu del signe d'interrogant endavant."
+
+- Class: text
+  Output: Sovint, voldrem més control sobre una seqüència que estem creant
+    que la que ens dóna l'operador `:`. La funció seq() ens serveix per
+    a aquest propòsit.
+
+- Class: cmd_question
+  Output: L'ús més bàsic de seq() fa exactament el mateix que l'operador
+    `:`. Proveu seg(1, 20) per veure això.
+  CorrectAnswer: seq(1, 20)
+  AnswerTests: omnitest(correctExpr='seq(1, 20)')
+  Hint: Entreu seq(1, 20) i entreu Intro. No es requereix l'espai
+    després de la coma, però es recomana ja que fa que el vostre codi
+    aparegui més atapeït.
+
+- Class: cmd_question
+  Output: Això ens dóna la mateixa sortida que 1:20. Tanmateix, suposem
+    que volem en canvi un vector de números en el rang de 0 a 10,
+    incrementat per 0.5. seq(0, 10, by=0.5) farà exactament això. Proveu-ho.
+  CorrectAnswer: seq(0, 10, by=0.5)
+  AnswerTests: omnitest(correctExpr='seq(0, 10, by=0.5)')
+  Hint: Encara esteu usant la funció seg() aquí, però aquest cop amb un
+    argument extra que li diu a R que voleu incrementar la vostra seqüència
+    per 0.5. Proveu seq(0, 10, by 0.5).
+
+- Class: cmd_question
+  Output: O potser no ens preocupa quan és l'increment i simplement volem
+    una seqüència de 30 números entre 5 i 10, seq(5, 10 , length=30) farà
+    aquesta tasca. Proveu-ho ara i emmagatzemeu el resultat a una nova
+    variable anomenada my_seq.
+  CorrectAnswer: my_seq <- seq(5, 10, length=30)
+  AnswerTests: omnitest(correctExpr='my_seq <- seq(5, 10, length=30)')
+  Hint: 'Esteu usant la mateixa funció aquí, però canviant els arguments
+    per a diferents resultats. Assegureu-vos d''emmagatzemar el resultat a
+    a una nova variable amb nom my_seq, d''aquesta manera:
+    my_seq <- seq(5, 10, length=30).'
+
+- Class: cmd_question
+  Output: Per confirmar que my_seq té una longitud de 30, podem usar
+    la funció length(). Proveu-ho ara.
+  CorrectAnswer: length(my_seq)
+  AnswerTests: omnitest(correctExpr='length(my_seq)')
+  Hint: Useu length(my_seq) per veure la longitud de la variable my_seq.
+
+- Class: text
+  Output: Suposem que no sabem la longitud de la variable my_seq, però
+    volem generar una seqüència d'enters de 1 a N, on N representa la
+    longitud del vector my_seq. En altres paraules, volem un nou vector
+    (1, 2, 3, ...) que és de la mateixa longitud que my_seq.
+
+- Class: cmd_question
+  Output: 'Hi ha diverses maneres que podríem fer això. Una possibilitat és
+    combinar l''operador «:» i la funció length() d''aquesta manera
+    1:length(my_seq). Proveu-ho.'
+  CorrectAnswer: 1:length(my_seq)
+  AnswerTests: omnitest(correctExpr='1:length(my_seq)')
+  Hint: Try 1:length(my_seq), sense assignar el resultat a una nova variable.
+
+- Class: cmd_question
+  Output: Una altra opció és usar seq(along.with = my_seq). Proveu ara això.
+  CorrectAnswer: seq(along.with = my_seq)
+  AnswerTests: omnitest(correctExpr='seq(along.with = my_seq)')
+  Hint: Entreu seq(along.with = my_seq). Noteu que estem usant la mateixa
+    funció seq(), però amb un altre argument anomenat `along.with`. Això
+    li diu a l'R que voleu una seqüencia 'al llarg de' ('along with') la
+    seqüència my_seq. Recordeu que podeu entrar ?seq si teniu preguntes
+    sobre la funció seq().
+
+- Class: cmd_question
+  Output: Tanmateix, tal com és el cas amb moltes tasques comunes, l'R té
+    una funció integrada separada per a aquest propòsit anomenada seq_along().
+    Entreu seq_along(my_seq) per veure-la en acció.
+  CorrectAnswer: seq_along(my_seq)
+  AnswerTests: omnitest(correctExpr='seq_along(my_seq)')
+  Hint: La funció seq_along() és una variació de la funció seq(). Proveu
+    seq_along(my_seq) per obtenir el mateix resultat per una altra via.
+
+- Class: text
+  Output: Sovint hi ha diferents enfocaments per resoldre el mateix problema,
+    particularment a l'R. Generalment són millors els enfocaments simples
+    que portin menys escriptura. També és important que el vostre codi sigui
+    llegible, perquè pugueu llegir, i d'altres també ho puguin fer, el que
+    s'està fent sense massa problemes.
+
+- Class: text
+  Output: Si l'R té una funció integrada per a una tasca particular, és
+    probable que aquesta funció estigui altament optimitzada per a aquest
+    propòsit i que sigui la vostra millor opció. A mesura que progresseu en
+    la programació de l'R, dissenyareu les vostres pròpies funcions per
+    realitzar tasques quan no hi ha opcions millors. Aprendrem a escriure
+    funcions pròpies a lliçons futures.
+
+- Class: text
+  Output: Una altra funció relacionada amb la creació de seqüències de
+    números és rep(), per 'replicate' (replicar). Mirem un parell d'usos.
+
+- Class: cmd_question
+  Output: Si estem interessats a crear un vector que conté 40 zeros, podem
+    usar rep(0, times=40). Proveu-ho.
+  CorrectAnswer: rep(0, times = 40)
+  AnswerTests: omnitest(correctExpr='rep(0, times = 40)')
+  Hint: Entreu rep(0, times = 40) per fer un vector contenint 40 zeros.
+
+- Class: cmd_question
+  Output: Si en canvi volem que el nostre vector contingui 10 repeticions
+    del vector (0, 1, 2), podem fer rep(c(0, 1, 2), times=10). Endavant!
+  CorrectAnswer: rep(c(0, 1, 2), times = 10)
+  AnswerTests: omnitest(correctExpr='rep(c(0, 1, 2), times = 10)')
+  Hint: Proveu rep(c(0, 1, 2), times = 10) per a una altra variació del
+    mateix tema. Assegureu-vos d'usar la funció c() per dir-li a l'R que
+    els números 0, 1, i 2 formen un vector. 
+
+- Class: cmd_question
+  Output: Finalment, suposem que en comptes de repetir el vector (0, 1, 2)
+    un cop i un altre, volem que el nostre vector contingui 10 zeros,
+    després 10 uns, després 10 dos. Podem fer aixó amb l'argument «each»
+    Proveu rep(c(0, 1, 2), each = 10).
+  CorrectAnswer: rep(c(0, 1, 2), each = 10)
+  AnswerTests: omnitest(correctExpr='rep(c(0, 1, 2), each = 10)')
+  Hint: Entreu rep(c(0, 1, 2), each = 10) per veure com l'argument «each»
+    altera el seu comportament lleugerament.
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs Courera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

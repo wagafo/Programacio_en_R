@@ -1,0 +1,269 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Espais de Treball i Fitxers
+  Author: David Kane, Walter Garcia-Fontes
+  Type: Standard
+  Organization: Williams College
+  Version: 0.1.2
+
+- Class: text
+  Output: "En aquesta lliçó, aprendreu com examinar el vostre espai local
+    de treball a l'R i començareu a explorar la relació entre el vostre
+    espai de treball i el sistema de fitxers del vostre ordinador."
+
+- Class: text
+  Output: "Atès que diferents sistemes operatius tenen convencions diferents
+    respecte a coses com els camins als fitxers, les sortides d'aquestes
+    ordres poden variar entre ordinadors."
+
+- Class: text
+  Output: Tanmateix, és important notar que R proveeix una API comuna (un
+    conjunt comú d'ordres) per interactuar amb fitxers, així el vostre codi
+    treballarà sense canvi a diferents tipus d'ordinadors.
+
+- Class: text
+  Output:  Comencem directament perquè podeu tenir una idea de com funcionen
+    aquestes funcions especials.
+
+- Class: cmd_question
+  Output: Determineu quin directory està usant la vostra sessió d'R com
+    a directori de treball usant getwd().
+  CorrectAnswer: getwd()
+  AnswerTests: omnitest(correctExpr='getwd()')
+  Hint: Entreu getwd() per determinar el directori de treball actual
+
+- Class: cmd_question
+  Output: Feu una llista de tots els objectes al vostre espai de treball
+    local usant ls().
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExpr='ls()')
+  Hint: Entreu ls() per veure tots els objectes al vostre espai de treball
+    local.
+
+- Class: text
+  Output: Algunes ordres d'R són les mateixes que les seves equivalents a Linux
+    o a un Mac. Tant els sistema operatiu de Linux com el de Mac estan
+    basats en un sistema operatiu que es diu Unix. És sempre una bona idea
+    aprendre més sobre Unix!
+
+- Class: cmd_question
+  Output: Assigneu 9 a x usant x <- 9.
+  CorrectAnswer: x <- 9
+  AnswerTests: omnitest(correctExpr='x <- 9')
+  Hint: Entreu x <- 9 per assignar 9 a x.
+
+- Class: cmd_question
+  Output: Mireu ara els objectes que hi ha al vostre espai de treball
+    usant ls().
+  CorrectAnswer: ls()
+  AnswerTests: omnitest(correctExpr='ls()')
+  Hint: Entreu ls() per veure tots els objectes
+
+- Class: cmd_question
+  Output: Feu una llista de tots els fitxers al vostre directori de
+    treball usant list.files() o dir().
+  CorrectAnswer: list.files()
+  AnswerTests: any_of_exprs('list.files()', 'dir()')
+  Hint: Entreu list.files() per fer una llista de tots els fitxers del vostre
+    directori de treball.
+
+- Class: cmd_question
+  Output: A mesura que recorrem aquesta lliçó, hauríeu d'examinar la
+    pàgina d'ajuda per a cada funció nova. Mireu la pàgina d'ajuda per a
+    list.files amb l'ordre ?list.files.
+  CorrectAnswer: ?list.files
+  AnswerTests: any_of_exprs('?list.files', '?dir', 'help("list.files")', 'help("dir")')
+  Hint:  Entreu ?list.files per veure la pàgina d'ajuda.
+
+- Class: text
+  Output: Una de les parts més útils dels fitxers d'ajuda de l'R és la secció
+    See Also. Llegiu aquesta secció per a list.files. Algunes d'aquestes
+    funcions es podran usar en parts posteriors d'aquesta lliçó.
+
+- Class: text
+  Output: Usant la funció args() sobre el nom d'una funció és també una
+    manera pràctica de veure quins arguments pot prendre una funció.
+
+- Class: cmd_question
+  Output: Useu la funció args() per determinar els arguments de list.files().
+  CorrectAnswer: args(list.files)
+  AnswerTests: omnitest(correctExpr='args(list.files)')
+  Hint: Entreu args(list.files) per veure els arguments de list.files.
+
+- Class: cmd_question
+  Output: Assigneu el valor del directori de treball actual a una variable
+    anomenada «old.dir».
+  CorrectAnswer: old.dir <- getwd()
+  AnswerTests: omnitest(correctExpr='old.dir <- getwd()')
+  Hint: Entreu old.dir <- getwd() per assignar el valor del directori actual
+    a una variable anomenada «old.dir».
+
+- Class: text
+  Output: Usarem old.dir al final d'aquesta lliçó per tornar al lloc on
+    hem començat. Moltes funcions de cerca com getwd() tenen la propietat
+    útil que retornen la resposta a la pregunta com un resultat de la funció.
+
+- Class: cmd_question
+  Output: Useu dir.create() per crear un directori al directori de treball
+    actual anomenat «testdir».
+  CorrectAnswer: dir.create("testdir")
+  AnswerTests: omnitest(correctExpr='dir.create("testdir")')
+  Hint: Entreu dir.creat("testdir") per crear un directori al directori
+    de treball actual anomenat «testdir»
+
+- Class: text
+  Output: Farem tota la nostra feina a aquest nou directori i després
+    l'eliminarem un cop hàgim acabat. Aquest és l'equivalent de l'R de l'anàleg
+    de «No embruteu l'entorn».
+
+- Class: cmd_question
+  Output: Establiu el vostre directori de treball a «testdir» amb l'ordre
+    setwd().
+  CorrectAnswer: setwd("testdir")
+  AnswerTests: any_of_exprs('setwd("testdir")', 'setwd("testdir/")')
+  Hint: Useu setwd("testdir") per establir el vostre directori de treball a
+    «testdir».
+
+- Class: text
+  Output: "En general, voldreu que el vostre directori de treball estigui
+    en algun lloc sensible, potser creat especialment per al projecte
+    específic en el qual esteu treballant. De fet, l'organització de la
+    vostra feina en paquets de R usant RStudio és una opció excel·lent. Vegeu
+    http://www.rstudio.com."
+
+- Class: cmd_question
+  Output: Creeu un fitxer al vostre directori de treball anomenat «mytest.R»
+    usant la funció file.create().
+  CorrectAnswer: file.create("mytest.R")
+  AnswerTests: omnitest(correctExpr='file.create("mytest.R")')
+  Hint: file.create("mytest.R") farà la feina demanada.
+
+- Class: cmd_question
+  Output: "Això hauria de ser l'únic fitxer a aquest directori nou creat.
+    Verifiqueu això fent una llista de tots els fitxers del directori actual."
+  CorrectAnswer: list.files()
+  AnswerTests: any_of_exprs('list.files()', 'dir()')
+  Hint: list.files() mostra que el directori sols conté mytest.R.
+
+- Class: cmd_question
+  Output: Verifiqueu que «mytest.R» existeix al directori de treball usant
+    la funció file.exists().
+  CorrectAnswer: file.exists("mytest.R")
+  AnswerTests: omnitest(correctExpr='file.exists("mytest.R")')
+  Hint: Useu file.exists("mytest.R") per verificar que existeix un fitxer.
+
+- Class: text
+  Output:  Aquests tipus de funcions són excessives per a l'ús interactiu.
+    Però si esteu executant un programa que recorre una sèrie de fitxers i fa
+    algun processament a cada una, voldríeu verificar que cada fitxer existeix
+    abans de processar-lo.
+
+- Class: cmd_question
+  Output: Accediu a la informació sobre el fitxer «mytest.R» amb file.info().
+  CorrectAnswer: file.info("mytest.R")
+  AnswerTests: omnitest(correctExpr='file.info("mytest.R")')
+  Hint: file.info("mytest.R") us farà la feina.
+
+- Class: text
+  Output: Podeu usar l'operador $ --- per exemple, file.info("mytest.R")$mode
+    --- per capturar elements específics.
+
+- Class: cmd_question
+  Output: Canvieu el nom del fitxer «mytest.R» a «mytest2.r» usant
+    file.rename().
+  CorrectAnswer: file.rename("mytest.R", "mytest2.R")
+  AnswerTests: any_of_exprs('file.rename("mytest.R", "mytest2.R")', 'file.rename(from = "mytest.R", to = "mytest2.R")')
+  Hint: file.rename("mytest.R", "mytest2.R") és la resposta. Si cerqueu Internet
+    usant paraules clau de la pregunta, junt amb la lletra R, us donarà
+    sovint una bona pista.
+
+- Class: text
+  Output: "El vostre sistema operatiu proveirà eines més simple per a aquest
+    tipus de tasques, però tenir la possibilitat de manipular els fitxers
+    amb programació és útil. Ara podeu intentar eliminar mytest.R usant
+    file.remove('mytest.R'), però això no funcionaria perquè mytest.R ja
+    no existeix, l'heu canviat de nom a aquest fitxer."
+
+- Class: cmd_question
+  Output: Feu una còpia de «mytest2.r» i anomeneu-la «mytest3.R» usant
+    file.copy().
+  CorrectAnswer: file.copy("mytest2.R", "mytest3.R")
+  AnswerTests: any_of_exprs('file.copy("mytest2.R", "mytest3.R")', 'file.copy(from = "mytest2.R", to = "mytest3.R")')
+  Hint: file.copy("mytest2.R", "mytest3.R") funciona.
+
+- Class: text
+  Output: Ara teniu dos fitxers al directori actual. Això no sembla massa
+    interessant. Però que passaria si teniu desenes, o milions, de fitxers
+    individuals? En aquest cas poder actuar amb programació sobre molts fitxers
+    a l'hora seria imprescindible. No us oblideu que podeu deixar la sessió
+    temporalment entrant play() i després retornar entrant nxt().
+
+
+- Class: cmd_question
+  Output: Mostreu el camí relatiu al fitxer «mytset3.R» usant file.path().
+  CorrectAnswer: file.path("mytest3.R")
+  AnswerTests: omnitest(correctExpr='file.path("mytest3.R")')
+  Hint: file.path("mytest3.R") funciona.
+
+- Class: cmd_question
+  Output: "Podeu usar file.path per construir camins a fitxers i directoris
+    independentment del sistema operatiu on el vostre codi de R s'està
+    executant. Passeu «folder1» i «folder2» com a argument a file.path per
+    fer un nom de camí independent de la plataforma."
+  CorrectAnswer: file.path("folder1", "folder2")
+  AnswerTests: omnitest(correctExpr='file.path("folder1", "folder2")')
+  Hint: file.path("folder1", "folder2") funcionarà.
+
+- Class: cmd_question
+  Output: "Mireu la documentació de dir.create entrant ?dir.create. Noteu
+    l'argument anomenat «recursive». Per crear directoris niuats, s'ha
+    d'establir «recursive» a TRUE."
+  CorrectAnswer: ?dir.create
+  AnswerTests: omnitest(correctExpr='?dir.create')
+  Hint: ?dir.create us mostrarà la documentació.
+
+- Class: cmd_question
+  Output: Creeu un directori al directori de treball actual anomenat
+    «testdir2» i un subdirectori anomenat «testdir3», fent-lo en una
+    única ordre usant dir.create() i file.path().
+  CorrectAnswer: dir.create(file.path("testdir2", "testdir3"), recursive = TRUE)
+  AnswerTests: omnitest(correctExpr='dir.create(file.path("testdir2", "testdir3"), recursive = TRUE)')
+  Hint: "dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE) farà la    feina. Si us heu oblidat de l'argument «recursive», l'ordre semblarà haver
+    funcionat, però no haurà creat el directori niuat."
+
+- Class: cmd_question
+  Output: Torneu al vostre directori original usant setwd(). (Recordeu que
+    vam crear la variable old.dir amb el camí complet per al directori de
+    treball original a l'inici d'aquestes preguntes.)
+  CorrectAnswer: setwd(old.dir)
+  AnswerTests: omnitest(correctExpr='setwd(old.dir)')
+  Hint: Use setwd(old.dir).
+
+- Class: text
+  Output: "Sovint és útil desar la configuració que teníeu abans que
+    inicieu una anàlisi i després retornar a aquesta configuració al final.
+    Aquest truc es fa servir sovint dins de funcions; per exemple, deseu
+    la configuració de par() amb què heu començat, després remeneu tot el
+    que voleu, i al final recupereu la configuració al final. Això no és
+    el que hem fet aquí, però sembla suficientment semblant per mencionar-lo."
+
+- Class: text
+  Output: "Després que acabeu aquesta lliçó elimineu el directori «testdir»
+    que acabeu de deixar (i tot el que hi ha dins d'ell)."
+
+- Class: text
+  Output: "No deixeu més que els resultats. Això sona com «No embruteu
+    l'entorn», però potser no. Segurament podreu pensar algun lema millor
+    . . ."
+
+- Class: text
+  Output: "En aquesta lliçó, heu après com examinar el vostre espai de
+    de treball R i com treballar amb el sistema de fitxers del vostre
+    ordinador. Gràcies per la vostra atenció!"
+
+- Class: mult_question
+  Output: "Us agradaria rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

@@ -1,0 +1,390 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Logica
+  Author: Sean Kross, Walter García-Fontes
+  Type: Standard
+  Organization: swirlstats
+  Version: 2.2.15
+
+- Class: text
+  Output: Aquesta lliçó té l'objectiu de ser una introducció a les
+    operacions lògiques amb l'R.
+
+- Class: text
+  Output: Hi ha dos valors lògics a l'R, també anomenats valors booleans. Són
+    TRUE (veritat) i FALSE (fals). A l'R podeu construir expressions
+    lògiques que s'avaluaran o bé TRUE o bé FALSE.
+
+- Class: text
+  Output: Moltes de les preguntes d'aquesta lliçó implicaran l'avaluació
+    d'expressions lògiques. Podria ser útil obrir una segona terminal amb
+    l'R on podeu experimentar amb algunes d'aquestes expressions.
+
+- Class: cmd_question
+  Output: La creació d'expressions lògiques requereix d'operadors lògics.
+    Possiblement teniu familiaritat amb els operadors aritmètics, com ara
+    «+»,  «-»,  «*» i «/». El primer operador lògic que discutirem és
+    l'operador d'igualtat, representat per dos signes d'igual «==». Useu
+    l'operador d'igualtat a sota per esbrinar si TRUE es igual a TRUE.
+  CorrectAnswer: TRUE == TRUE
+  AnswerTests: omnitest(correctExpr='TRUE == TRUE')
+  Hint: Useu l'operador d'igualtat i entreu TRUE == TRUE
+
+- Class: text
+  Output: De la mateixa manera que l'aritmètica, les expressions lògiques
+    poden agrupar-se en parèntesis de manera que l'expressió sencera
+    (TRUE == TRUE) == TRUE avaluï a TRUE.
+
+- Class: cmd_question
+  Output: Per comprovar aquesta propietat, proveu d'avaluar
+    (FALSE == TRUE) == FALSE . 
+  CorrectAnswer: (FALSE == TRUE) == FALSE
+  AnswerTests: omnitest(correctExpr='(FALSE == TRUE) == FALSE')
+  Hint: "Proveu d'entrar: (FALSE == TRUE) == FALSE"
+
+- Class: cmd_question
+  Output: L'operador d'igualtat també es pot fer servir per comparar nombres.
+    Useu «==» per veure si 6 és igual a 7.
+  CorrectAnswer: 6 == 7
+  AnswerTests: omnitest(correctExpr='6 == 7')
+  Hint: Useu l'operador d'igualtat i entreu 6 == 7
+
+- Class: text
+  Output: L'expressió prèvia avalua a FALSE perquè 6 és menys que 7.
+    Afortunadament hi ha operadors de desigualtat que ens permeten comprovar
+    si un valor és més petit o més gran que un altre valor.
+
+- Class: cmd_question
+  Output: L'operador més petit que «<» comprova si un número a l'esquerra
+    de l'operador (anomenat l'operand esquerre) és més petit que el nombre
+    a la dreta de l'operador (anomenat l'operand dret). Escriviu l'expressió
+    per comprovar si 6 és menys que 7.
+  CorrectAnswer: 6 < 7
+  AnswerTests: omnitest(correctExpr='6 < 7')
+  Hint: Useu l'operador més petit que i entreu 6 < 7
+
+- Class: cmd_question
+  Output: Hi ha també un operador més petit o igual que «<=» que comprova si
+    l'operand és més petit o igual que l'operador de la dreta. Escriviu
+    una expressió per comprovar si 10 és més petit o igual que 10.
+  CorrectAnswer: 10 <= 10
+  AnswerTests: omnitest(correctExpr='10 <= 10')
+  Hint: Useu l'operador «<=» i escriviu 10 <= 10
+
+- Class: text
+  Output: Teniu en compte que hi ha els operadors corresponents més gran
+    que «>» i més gran o igual que «>=».
+
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a FALSE?
+  CorrectAnswer: 9 >= 10
+  AnswerChoices: 9 >= 10; 7 == 7; 6 < 8; 0 > -36 
+  AnswerTests: omnitest(correctVal='9 >= 10')
+  Hint: Si us cal, podeu avaluar aquestes expressions en una sessió de R
+     separada per trobar la resposta correcta.
+
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a TRUE?
+  CorrectAnswer: 9 >= 10
+  AnswerChoices: 9 >= 10; 7 == 9; 57 < 8; -6 > -7 
+  AnswerTests: omnitest(correctVal='-6 > -7')
+  Hint: Si us cal, podeu avaluar aquestes expressions en una sessió de R
+     separada per trobar la resposta correcta.
+
+- Class: cmd_question
+  Output: L'operador que discutirem a continuació és l'operador «no igual a»,
+    representat per «!=». Aquest operador comprova si dos valors no són iguals,
+    de manera que TRUE != FALSE avalua a TRUE. De la mateixa manera que
+    l'operador d'igualtat, «!=» també es pot fer servir amb nombres. Proveu
+    d'escriure una expressió per veure si 5 no és igual a 7.
+  CorrectAnswer: 5 != 7
+  AnswerTests: omnitest(correctExpr='5 != 7')
+  Hint: Useu l'operador no és igual i escriviu 5 != 7
+
+- Class: cmd_question
+  Output: 'Per negar les expressions booleanes podeu usar l''operador NO,
+     que s''escriu amb un signe d''exclamació («!»). Per exemple, !TRUE
+     (que es llegeix «NO TRUE») avaluarà a FALSE i !FALSE (que es llegeix
+     «NO FALSE») avaluarà a TRUE. Proveu d''usar aquest operador per trobar
+     l''oposat a si 5 és igual a 7.'
+  CorrectAnswer: '!5 == 7'
+  AnswerTests: any_of_exprs('!5 == 7', '!(5 == 7)')
+  Hint: Aquesta expressió té una mica de truc, penseu de negar l'expressió
+    5 == 7 (el que us fa falta és un signe d'exclamació endavant).
+
+- Class: text
+  Output: Fem una pausa per recapitular. L'operador igual «==» comprova si
+    dos valors booleans o numèrics són iguals, l'operador no igual «!=»
+    comprova si dos valors booleans o numèrics no són iguals, i l'operador NO
+    «!» nega les expressions lògiques, de manera que les expressions TRUE
+    passen a ser FALSE, i les FALSE passen a ser TRUE.
+
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a FALSE?
+  CorrectAnswer: "!(0 >= -1)"
+  AnswerChoices: "!(0 >= -1); !FALSE; 7 != 8; 9 < 10"
+  AnswerTests: omnitest(correctVal='!(0 >= -1)')
+  Hint: Si us cal, podeu avaluar aquestes expressions en una sessió de R
+     separada per trobar la resposta correcta.
+
+- Class: mult_question
+  Output: 'Com penseu que avaluarà l''expressió següent?:
+    (TRUE != FALSE) == !(6 == 7)'
+  CorrectAnswer: TRUE
+  AnswerChoices: TRUE; FALSE; Pot haver-hi la veritat objectiva en programació?;  %>%
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: Proveu d'avaluar primer els parèntesis i després la igualtat central.
+
+- Class: text
+  Output: En algun moment us pot caldre examinar relacions entre expressions
+    lògiques múltiples. Aquí és on l'operador I o l'operador O són útils.
+
+- Class: cmd_question
+  Output: Mirem com funciona l'operador I. Hi ha dos operadors I a l'R,
+    «&» i «&&». Tots dos operadors funcionen de manera semblant, si els
+    operands dret i esquerre són TRUE, l'operació sencera és TRUE, en cas
+    contrari és FALSE. Per exemple, TRUE & TRUE avalua a TRUE. Proveu d'entrar
+    FALSE & FALSE per veure com s'avalua.
+  CorrectAnswer: FALSE & FALSE
+  AnswerTests: omnitest(correctExpr='FALSE & FALSE')
+  Hint: Simplement per il·lustrar com avalua l'expressió entreu FALSE & FALSE
+
+- Class: cmd_question
+  Output: Podeu usar l'operador «&» per avaluar I al llarg d'un vector.
+    La versió «&&» de l'operador sols avalua el primer membre d'un vector.
+    Provarem els dos per practicar. Entreu TRUE & c(TRUE, FALSE, FALSE).
+  CorrectAnswer: "TRUE & c(TRUE, FALSE, FALSE)"
+  AnswerTests: omnitest(correctExpr='TRUE & c(TRUE, FALSE, FALSE)')
+  Hint: Per veure com funciona l'operador I amb un vector, entreu
+    TRUE & c(TRUE, FALSE, FALSE)
+
+- Class: text
+  Output: El que passa en aquest cas és que l'operand esquerre «TRUE»
+    es recicla al llarg de cada element del vector a l'operand dret. Això
+    és equivalent a l'ordre c(TRUE, TRUE, TRUE) & c(TRUE, FALSE, FALSE). 
+ 
+- Class: cmd_question
+  Output: Ara entrarem la mateixa expressió excepte que usarem la versió
+     «&&» de l'operador. Entreu l'expressió TRUE && c(TRUE, FALSE, FALSE)
+  CorrectAnswer: "TRUE && c(TRUE, FALSE, FALSE)"
+  AnswerTests: omnitest(correctExpr='TRUE && c(TRUE, FALSE, FALSE)')
+  Hint: Com veureu, la versió && de I funciona de manera diferent. Entreu
+    TRUE && c(TRUE, FALSE, FALSE)"
+
+- Class: text
+  Output: En aquest cas, l'operand esquerre sols s'avalua amb el primer
+    membre de l'operand dret (el vector). La resta d'elements al vector
+    no s'avaluen en absolut en aquesta expressió.
+    
+- Class : text
+  Output: L'operador O segueix un conjunt semblant de regles. La versió
+    «|» de O avalua O al llarg de tot un vector, mentre que la versió
+    «||» de O sols avalua el primer membre d'un vector.
+
+- Class : text
+  Output: Una expressió que usi l'operador O avaluarà a TRUE si l'operand
+    esquerre o l'operand dret és TRUE. Si els dos són TRUE, l'expressió
+    avaluarà a TRUE. Tanmateix, si cap dels dos operands és TRUE, aleshores
+    l'expressió serà FALSE.
+    
+- Class: cmd_question
+  Output: Provem la versió vectoritzada de l'operador O. Entreu
+    TRUE | c(TRUE, FALSE, FALSE).
+  CorrectAnswer: "TRUE | c(TRUE, FALSE, FALSE)"
+  AnswerTests: omnitest(correctExpr='TRUE | c(TRUE, FALSE, FALSE)')
+  Hint: Proveu l'operador vectoritzat OR entrant TRUE | c(TRUE, FALSE, FALSE)
+  
+- Class: cmd_question
+  Output: Provem ara la versió no vectoritzada de O. Entreu
+    TRUE || c(TRUE, FALSE, FALSE).
+  CorrectAnswer: "TRUE || c(TRUE, FALSE, FALSE)"
+  AnswerTests: omnitest(correctExpr='TRUE || c(TRUE, FALSE, FALSE)')
+  Hint: Com veureu, la versió || de O no és vectoritzada. Entreu
+    TRUE || c(TRUE, FALSE, FALSE)"
+  
+- Class : text
+  Output: 'Les expressions lògiques es poden ajuntar tal com les
+    expressions aritmètiques. Les expressions:
+    «6 != 10 && FALSE && 1 >= 2» o «TRUE || 5 < 9.3 || FALSE»
+    es poden veure perfectament.'
+  
+- Class : cmd_question
+  Output: Com podreu recordar, les operacions aritmètiques tenen un ordre
+    de realització, de la mateixa manera les expressions lògiques tenen
+    un ordre. Tots els operadors I s'avaluen abans que els operadors O. Mirem
+    un exemple d'un cas ambigu. Entreu 5 > 8 || 6 != 8 && 4 > 3.9
+  CorrectAnswer: "5 > 8 || 6 != 8 && 4 > 3.9"
+  AnswerTests: omnitest(correctExpr='5 > 8 || 6 != 8 && 4 > 3.9')
+  Hint: Mireu com funciona l'ordre de les operacions entrant
+    5 > 8 || 6 != 8 && 4 > 3.9
+  
+- Class : text
+  Output: Anem a recórrer l'ordre de les operacions al cas de dalt. Primer
+    s'avaluen els operands esquerre i dret de l'operador I. 6 no és igual a 8,
+    4 és més gran que 3.9, consegüentment els dos operands són TRUE de manera
+    que l'expresssió TRUE && TRUE avalua a TRUE. A continuació mirem l'operand
+    esquerre de l'operador OR. 5 no és més gran que 8, així que tota l'expressió
+    es redueix a FALSE || TRUE. Atès que l'operand dret de l'expressió és TRUE,
+    l'expressió sencera avalua a TRUE.
+    
+- Class: mult_question
+  Output: Quina de les expressions següents avalua a TRUE?
+  CorrectAnswer: "TRUE && FALSE || 9 >= 4 && 3 < 6"
+  AnswerChoices: "TRUE && FALSE || 9 >= 4 && 3 < 6; TRUE && 62 < 62 && 44 >= 44; 99.99 > 100 || 45 < 7.3 || 4 != 4.0; FALSE || TRUE && FALSE"
+  AnswerTests: omnitest(correctVal='TRUE && FALSE || 9 >= 4 && 3 < 6')
+  Hint: Proveu les diferents expressions i prepareu la vostra resposta.
+  
+- Class: mult_question
+  Output: Quina de les expressions següents avalua a FALSE?
+  CorrectAnswer: "FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5"
+  AnswerChoices: "FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5; FALSE || TRUE && 6 != 4 || 9 > 4; !(8 > 4) ||  5 == 5.0 && 7.8 >= 7.79; 6 >= -9 && !(6 > 7) && !(!TRUE)"
+  AnswerTests: omnitest(correctVal='FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5')
+  Hint: Proveu les diferents expressions i prepareu la vostra resposta.
+  
+- Class : text
+  Output: Ara que teniu familiaritat amb els operadors lògics de l'R, podeu
+    fer servir algunes funcions que proveeix l'R per tractar amb expressions
+    lògiques.
+    
+- Class : cmd_question
+  Output: La funció isTRUE() agafa un argument. Si aquest argument avalua a
+    TRUE, la funció retornarà TRUE. En cas contrari, la funció retornarà
+    FALSE. Proveu d'usar la funció entrant isTRUE(6 > 4)
+  CorrectAnswer: "isTRUE(6 > 4)"
+  AnswerTests: omnitest(correctExpr='isTRUE(6 > 4)')
+  Hint: Proveu isTRUE() entrand isTRUE(6 > 4)
+
+- Class: mult_question
+  Output: Quina de les següents opcions avalua a TRUE?
+  CorrectAnswer: "!isTRUE(4 < 3)"
+  AnswerChoices: "isTRUE(!TRUE); isTRUE(3); isTRUE(NA); !isTRUE(4 < 3); !isTRUE(8 != 5)"
+  AnswerTests: omnitest(correctVal='!isTRUE(4 < 3)')
+  Hint: La funció isTRUE() sols avaluarà a TRUE si l'argument passat avalua
+    a TRUE.
+  
+- Class : cmd_question
+  Output: La funció identical() retornarà TRUE si dos objectes R que se
+    li passen com argument són idèntics. Proveu la funció identical() entrant
+    identical('bessons','bessons')
+  CorrectAnswer: "identical('bessons', 'bessons')"
+  AnswerTests: omnitest(correctExpr="identical('bessons', 'bessons')")
+  Hint: Si voleu veure si dos objectes de R són idèntics, entreu
+    identical('bessons','bessons')
+  
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a TRUE?
+  CorrectAnswer: "identical(5 > 4, 3 < 3.1)"
+  AnswerChoices: "identical(5 > 4, 3 < 3.1); identical(4, 3.1); identical('hello', 'Hello'); !identical(7, 7)"
+  AnswerTests: omnitest(correctVal='identical(5 > 4, 3 < 3.1)')
+  Hint: identical() avaluarà a TRUE sols si els seus arguments són exactament
+    iguals
+  
+- Class : cmd_question
+  Output: També hauríeu de tenir en compte la funció xor(), que pren dos
+    arguments. La funció xor() s'utilitza per a un O exclusiu. Si un argument
+    avalua a TRUE i l'altre argument avalua a FALSE, aleshores aquesta funció
+    retornarà TRUE, en cas contrari retornarà FALSE. Proveu la funció
+    xor() entrannt xor(5 == 6, !FALSE)
+  CorrectAnswer: "xor(5 == 6, !FALSE)"
+  AnswerTests: omnitest(correctExpr='xor(5 == 6, !FALSE)')
+  Hint: Proveu la funció xor() entrant xor(5 == 6, !FALSE)
+  
+- Class : text
+  Output: 5 == 6 avalua a FALSE, !FALSE avalua a TRUE, així
+    xor(FALSE, TRUE) avalua a TRUE. Per una altra part, si el primer
+    argument s'hagués canviat a 5 == 5, i els segon argument s'hagués
+    deixat igual, aleshores els dos arguments haurien estat TRUE, així
+    xor(TRUE, TRUE) hauria avaluat a FALSE.
+    
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a FALSE?
+  CorrectAnswer: "xor(4 >= 9, 8 != 8.0)"
+  AnswerChoices: "xor(4 >= 9, 8 != 8.0); xor(!isTRUE(TRUE), 6 > -1); xor(identical(xor, 'xor'), 7 == 7.0); xor(!!TRUE, !!FALSE)"
+  AnswerTests: omnitest(correctVal='xor(4 >= 9, 8 != 8.0)')
+  Hint: Perquè xor() avaluï a TRUE, un argument ha de ser TRUE i un altre ha
+    de ser FALSE
+    
+- Class: cmd_question
+  Output: 'Per a les preguntes següents, hem de crear un vector d''enters
+    anomenat ints. Creeu aquest vector entrant: ints <- sample(10)'
+  CorrectAnswer: "ints <- sample(10)"
+  AnswerTests: omnitest(correctExpr='ints <- sample(10)')
+  Hint: Per crear un vector de deu enters sense reemplaçament entreu
+    ints <- sample(10)
+  
+- Class : cmd_question
+  Output: Ara simplement mostreu el contingut de ints
+  CorrectAnswer: "ints"
+  AnswerTests: omnitest(correctExpr='ints')
+  Hint: Per veure el tipus de vector entreu ints
+  
+- Class : cmd_question
+  Output: El vector «ints» és una mostra aleatòria d'enters d'1 a 10
+    sense reemplaçament. Suposeu que ens volem fer algunes preguntes
+    de lògica sobre els continguts de ints. Si entrem ints > 5, obtindrem
+    un vector lògic corresponent a la pregunta de si cada element de ints
+    és més gran que 5. Proveu d'entrar ints > 5
+  CorrectAnswer: "ints > 5"
+  AnswerTests: omnitest(correctExpr='ints > 5')
+  Hint: Per veure quins elements de «ints» són més grans que 5 entreu
+    ints > 5
+  
+- Class : text
+  Output: Podem usar el vector lògic resultant per preguntar-nos altres
+    qüestions sobre ints. La funció which() agafa un vector lògic com a a
+    argument i retorna els índexs del vector que són TRUE. Per exemple
+    which(c(TRUE, FALSE, TRUE)) retorna el vector c(1, 3).
+
+- Class : cmd_question
+  Output: Useu la funció which() per trobar els índexs de ints que són
+    més grans que 7.
+  CorrectAnswer: "which(ints > 7)"
+  AnswerTests: omnitest(correctExpr='which(ints > 7)')
+  Hint: Useu la funció which() sobre el vector lògic produït per ints > 7
+  
+- Class: mult_question
+  Output: Quina de les ordres següents produeix els índexs dels elements
+    de ints que són més petits o iguals que 2?
+  CorrectAnswer: "which(ints <= 2)"
+  AnswerChoices: "ints < 2; ints <= 2; which(ints < 2); which(ints <= 2)"
+  AnswerTests: omnitest(correctVal='which(ints <= 2)')
+  Hint: Useu la funció which()
+  
+- Class : text
+  Output: Com la funció which(), les funcions any() i all() prenen vectors
+    lògics com a arguments. La funció any() retornarà TRUE si un o més dels
+    elements del vector lògic són TRUE. La funció all() retornarà TRUE si
+    tots els elements del vector lògic són TRUE.
+    
+- Class : cmd_question
+  Output: Useu la funció any() per veure si algun dels elements de ints
+    és més petit que zero.
+  CorrectAnswer: "any(ints < 0)"
+  AnswerTests: omnitest(correctExpr='any(ints < 0)')
+  Hint: Useu la funció any() sobre al vector lògic produït per ints < 0
+  
+- Class : cmd_question
+  Output: Useu la funció all() per veure si tots els elements de ints són
+    més grans que zero.
+  CorrectAnswer: "all(ints > 0)"
+  AnswerTests: omnitest(correctExpr='all(ints > 0)')
+  Hint: Useu la funció all() sobre el vector lògic produït per ints > 0
+
+- Class: mult_question
+  Output: Quina de les opcions següents avalua a TRUE?
+  CorrectAnswer: "any(ints == 10)"
+  AnswerChoices: "any(ints == 10); all(ints == 10); all(c(TRUE, FALSE, TRUE)); any(ints == 2.5)"
+  AnswerTests: omnitest(correctVal='any(ints == 10)')
+  Hint: any() avaluarà a TRUE si hi ha un o  més elements TRUE a un vector
+    lògic.
+  
+- Class : text
+  Output: Això és tot per a aquesta introducció a la lògica amb R. Si voleu
+    el que podeu fer amb la lògica, mireu la lliçó sobre control de flux!
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

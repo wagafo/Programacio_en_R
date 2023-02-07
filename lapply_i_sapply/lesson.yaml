@@ -1,0 +1,394 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: lapply i sapply
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.11
+
+- Class: text
+  Output: En aquesta lliçó, aprendreu a fer servir lapply() i sapply(), els
+    dos membres més importants de la família de funcions *apply de R, també
+    coneguts com funcions de bucle.
+
+- Class: text
+  Output: Aquestes potents funcions, junt amb les seves parents properes
+    (vapply() i tapply(), entre d'altres), ofereixen un mitjà concís i
+    convenient d'implementar l'estratègia Divideix-Aplica-Combina de
+    l'anàlisi de dades.
+
+- Class: text
+  Output: Cadascuna de les funcions *apply DIVIDIRÀ algunes dades en peces
+    més petites, APLICARÀ una funció a cada peça, i COMBINARÀ els resultats.
+    Podeu trobar una discussió més detallada d'aquesta estratègia a l'article
+    del Hadley Wikcham amb títol «The Split-Apply-Combine Strategy for Data
+    Analysis» al Journal of Statistical Software.
+
+- Class: text
+  Output: "A través d'aquesta lliçó usarem el conjunt de dades Flags del
+    dipòsit UCI Machine Learning. Aquest conjunt de dades conté detalls
+    de diverses nacions i les seves banderes. Podeu trobar més informació
+    aquí: http://archive.ics.uci.edu/ml/datasets/Flags"
+
+- Class: text
+  Output: Comencem perquè podeu conèixer com funcionen aquestes funcions
+    especials!
+
+- Class: cmd_question
+  Output: Hem desat el conjunt de dades a un marc de dades anomenat flags.
+    Entreu head(flags) per veure les primeres sis línies (o sigui el «cap»,
+    «head» en anglès) del conjunt de dades. 
+  CorrectAnswer: head(flags)
+  AnswerTests: omnitest(correctExpr='head(flags)')
+  Hint: Entreu head(flags) per veure el «cap» («head») del conjunt de dades.
+
+- Class: cmd_question
+  Output: Possiblement heu de desplaçar-vos a ldim(a pantalla per veure tota
+    la sortida. Mirem ara la dimensió del conjunt de dades usant dim(flags).
+  CorrectAnswer: dim(flags)
+  AnswerTests: omnitest(correctExpr='dim(flags)')
+  Hint: Entreu dim(flags) per veure les dimensions del conjunt de dades.
+
+- Class: text
+  Output: Això ens diu que hi ha 194 files, o observacions, i 30 columnes,
+    o variables. Cada observació és un país i cada variable descriu alguna
+    característica del país o de la seva bandera. Per obrir una descripció
+    més completa del conjunt de dades en un fitxer de text separat, entreu
+    viewinfo() quan hàgiu tornat a la línia d'ordres (>) un cop acabada
+    la lliçó. 
+
+- Class: cmd_question
+  Output: De forma semblant a qualsevol conjunt de dades, ens agradaria saber
+    en quin format s'han desat les variables. En altres paraules, quina és
+    la «classe» de cada variable? Què passa si fem class(flags)? Proveu-ho.
+  CorrectAnswer: class(flags)
+  AnswerTests: omnitest(correctExpr='class(flags)')
+  Hint: Entreu class(flags) per veure què passa.
+
+- Class: text
+  Output: Això simplement ens diu que el conjunt de dades sencer està
+    desat com un «data.frame» (un marc de dades) però no contesta la nostra
+    pregunta. El que ens cal realment és usar la funció class() a cada
+    columna individual. Podríem fer això (és a dir, columna per columna),
+    però és molt més ràpid si podem automatitzar el procés. Sembla un bucle!
+
+- Class: text
+  Output: La funció lapply() agafa una llista com a entrada, aplica una
+    funció a cada element de la llista, i després retorna una llista de la
+    mateixa longitud que l'original. Atès que un marc de dades no és més que
+    simplement una llista de vectors (podeu veure això amb as.lists(flags)),
+    podem usar lapply() per aplicar la funció class() a cada columna del
+    conjunt de dades flags. Mirem això en acció!
+
+- Class: cmd_question
+  Output: Entreu cls_list <- lapply(flags, class) per aplicar la funció
+    class() a cada columna del conjunt de dades flags i deseu el resultat
+    a una variable anomenada cls_list. Noteu que simplement proveïu el nom de
+    la funció que voleu aplicar (és a dir, en aquest cas «class»), sense
+    els parèntesis usuals a darrera.
+  CorrectAnswer: cls_list <- lapply(flags, class)
+  AnswerTests: omnitest(correctExpr='cls_list <- lapply(flags, class)')
+  Hint: Entreu cls_list <- lapply(flags, class) per aplicar la funció class()
+    a cada columna del nostre conjunt de dades i emmagatzemar el resultat
+    a una variable anomenada cls_list.
+
+- Class: cmd_question
+  Output: Entreu cls_list per veure el resultat.
+  CorrectAnswer: cls_list
+  AnswerTests: omnitest(correctExpr='cls_list')
+  Hint: Entreu cls_list per veure el resultat.
+
+- Class: cmd_question
+  Output: La «l» a «lapply» vol dir «list» («llista»). Entreu class(cls_list)
+    per confirmar que lapply() ha retornat una llista.
+  CorrectAnswer: class(cls_list)
+  AnswerTests: omnitest(correctExpr='class(cls_list)')
+  Hint: Entreu class(cls_list) per confirmar que lapply() ha retornat una
+    llista.
+ 
+- Class: text
+  Output: Com esperàvem, hem obtingut una llista de longitud 30 -- un
+    element per cada variable/columna. La sortida seria considerablement
+    més compacta si poguéssim representar-la com un vector en comptes d'una
+    llista.
+
+- Class: cmd_question
+  Output: Potser recordeu d'una lliçó anterior que les llistes són més
+    útils per emmagatzemar múltiples classes de dades. En aquest cas,
+    atès que cada element de la llista retornada per lapply() és un vector
+    de caràcters de longitud igual a u (és a dir «enter» i «vector»),
+    cls_list pot simplificar-se a un vector de caràcters. Per fer això
+    manualment, entreu as.character(cls_list).
+  CorrectAnswer: as.character(cls_list)
+  AnswerTests: omnitest(correctExpr='as.character(cls_list)')
+  Hint: Entreu as.character(cls_list) per forçar cls_list a un vector de
+    caràcters.
+
+- Class: cmd_question
+  Output: sapply() us permet automatitzar aquest procés cridant a lapply()
+    a darrera l'escena, però després us intenta simplificar (d'aquí la «s» a
+    «sapply») el resultat. Useu sapply() de la mateixa manera que heu usat
+    lapply() per obtenir la classe de cada columna del conjunt de dades flags
+    i deseu el resultat a cls_vect. Si us cal ajuda, entreu ?apply per
+    cridar a la documentació.
+  CorrectAnswer: cls_vect <- sapply(flags, class)
+  AnswerTests: omnitest(correctExpr='cls_vect <- sapply(flags, class)')
+  Hint: Entreu cls_vect <- sapply(flags, class) per desar la columna classes
+    a un vector de caràcters anomenat cls_vect.
+
+- Class: cmd_question
+  Output: Useu class(cls_vect) per confirmar que sapply() ha simplificat el
+    resultat a un vector de caràcters.
+  CorrectAnswer: class(cls_vect)
+  AnswerTests: omnitest(correctExpr='class(cls_vect)')
+  Hint: Entreu class(cls_vect) per confirmar que sapply() ha retornat un
+    vector de caràcters.
+
+- Class: text
+  Output: En general, si el resultat és una llista on cada element és de
+    longitud igual a 1, aleshores sapply() retorna un vector. Si el resultat
+    és una llista on cada element és un vector de la mateixa longitud (> 1),
+    sapply() retorna una matriu. Si sapply() no pot determinar com són les
+    dades, aleshores simplement retorna una llista, igual a la què us
+    donaria lapply().
+
+- Class: text
+  Output: Anem a practicar una mica més amb lapply() i sapply()!
+
+- Class: text
+  Output: Les columnes 11 a 17 del nostre conjunt de dades són variables
+    indicador, cada una d'elles representant un color diferent. El valor
+    de la variable indicador és 1 si el color està present a la bandera del
+    país, i 0 en cas contrari.
+
+- Class: cmd_question
+  Output: Aleshores, si voleu saber el nombre total de països (en el nostre
+    conjunt de dades) amb, per exemple, el color taronja de la seva bandera,
+    simplement podem sumar tots els 1 i 0 de la columna «orange». Proveu
+    sum(flags$orange) per veure això.
+  CorrectAnswer: sum(flags$orange)
+  AnswerTests: omnitest(correctExpr='sum(flags$orange)')
+  Hint: Useu sum(flags$orange) per sumar tots els 1 i 0 de la columna «orange».
+
+- Class: text
+  Output: Ara volem repetir aquesta operació per a cada un dels colors que
+    hi ha al conjunt de dades.
+
+- Class: cmd_question
+  Output: Primer, useu flag_colors <- flags[, 11:17] per extraure les columnes
+    que contenen les dades de color i deseu-les a un nou marc de dades
+    anomenat flag_colors. (Noteu la coma abans de 11:17. Aquesta ordre per
+    crear subconjunts li diu a R que voleu totes les files, però sols
+    les columnes 11 a 17).
+  CorrectAnswer: flag_colors <- flags[, 11:17]
+  AnswerTests: omnitest(correctExpr='flag_colors <- flags[, 11:17]')
+  Hint: flag_colors <- flags[, 11:17] farà la feina.
+
+- Class: cmd_question
+  Output: Useu la funció head() per mirar a les primeres 6 línies de
+    flag_colors.
+  CorrectAnswer: head(flag_colors)
+  AnswerTests: omnitest(correctExpr='head(flag_colors)')
+  Hint: head(flag_colors) mostrarà les primeres 6 línies de flag_colors.
+
+- Class: cmd_question
+  Output: Per obtenir una llista que contingui la suma de cada columna de
+    flag_colors, crideu la funció lapply() amb dos arguments. El primer
+    argument és l'objecte sobre el qual volem fer el bucle (o sigui
+    flag_colors) i el segon argument és el nom de la funció que volem aplicar
+    a cada column (o sigui sum). Recordeu que el segon argument és simplement
+    el nom de la funció sense parèntesis, etc.
+  CorrectAnswer: lapply(flag_colors, sum)
+  AnswerTests: omnitest(correctExpr='lapply(flag_colors, sum)')
+  Hint: Useu lapply(flag_colors, sum) per retornar la suma de cada columna.
+
+- Class: text
+  Output: Això us diu que de les 194 banderes del nostre conjunt de dades, 153
+    contenen el color vermell (red), 91 contenent verd (green), 99 blau (blue)
+    i així successivament.
+
+- Class: cmd_question
+  Output: El resultat és una llista, atès que lapply() sempre retorna una
+    llista. Cada element d'aquesta llista és de longitud u, així que el
+    resultat es pot simplificar a un vector cridant sapply() en comptes de
+    lapply(). Proveu-ho ara.
+  CorrectAnswer: sapply(flag_colors, sum)
+  AnswerTests: omnitest(correctExpr='sapply(flag_colors, sum)')
+  Hint: Useu sapply(flag_colors, sum) per retornar un vector de les sumes
+    de les columnes.
+
+- Class: text
+  Output: Potser és més informatiu trobar la proporció de banderes (de
+    les 194 possibles) que contenen cada color. Atès que cada columna no
+    és més que un conjunt de 1 i 0, la mitjana aritmètica de cada columna
+    ens donarà la proporció de 1. (Si no ho teniu clar, penseu una situació
+    més simple on teniu 3 casos que valen 1, i dos que valen 0 -- (1 + 1 +
+    + 1 + 0 + 0 ) / 5 = 3/5 = 0.6). 
+
+- Class: cmd_question
+  Output: Useu sapply() per aplicar la funció mean() a cada columna de
+    flag_colores. Recordeu que el segon argument de sapply() hauria
+    d'especificar simplement el nom de la funció (per exemple mean) que
+    voleu aplicar.
+  CorrectAnswer: sapply(flag_colors, mean)
+  AnswerTests: omnitest(correctExpr='sapply(flag_colors, mean)')
+  Hint: sapply(flag_colors, mean) farà el truc!
+
+- Class: text
+  Output: Als exemples que hem mirat fins ara, sapply() ha estat capaç de
+    simplificar el resultat a un vector. Això és degut a què cada element
+    de la llista retornat per lapply() era un vector de longitud u. Recordeu
+    que sapply() en canvi retorna una matriu on cada element de la llista
+    retornat per lapply() és un vector de la mateixa longitud (> 1).
+
+- Class: cmd_question
+  Output: Per il·lustrar això, anem a extraure les columnes 19 a 23 del
+    conjunt de dades de banderes i desar el resultat a un nou marc de dades
+    anomenat flag_shapes. flag_shapes <- flags[, 19:23] ho farà. 
+  CorrectAnswer: flag_shapes <- flags[, 19:23]
+  AnswerTests: omnitest(correctExpr='flag_shapes <- flags[, 19:23]')
+  Hint: flag_shapes <- flags[, 19:23] desarà les columnes 19 a 23 en una
+    nova variable.
+
+- Class: text
+  Output: Cada una d'aquestes columnes (i. e. variables) representa el
+    nombre de cops que apareix una forma o disseny particular en la bandera
+    d'un país. Estem interessats en el nombre mínim i màxim de cops que
+    apareix cada forma o disseny.
+
+- Class: cmd_question
+  Output: La funció range() retorna el mínim i el màxim del primer argument,
+    que hauria de ser un vector numèric. Useu lapply() per aplicar la funció
+    range() a cada columna de flag_shapes. No us preocupeu de desar el resultat
+    a una nova variable. Ara sabem que lapply() sempre retorna una llista.
+  CorrectAnswer: lapply(flag_shapes, range)
+  AnswerTests: omnitest(correctExpr='lapply(flag_shapes, range)')
+  Hint: Proveu laplly(flag_shapes, range) per aplicar la funció range() a
+    cada columna de flag_shapes.
+
+- Class: cmd_question
+  Output: Feu la mateixa operació, però usant sapply() i deseu el resultat
+    a una variable anomenada shape_mat.
+  CorrectAnswer: shape_mat <- sapply(flag_shapes, range)
+  AnswerTests: omnitest(correctExpr='shape_mat <- sapply(flag_shapes, range)')
+  Hint: shape_mat <- sapply(flag_shapes, range) aplicarà la funció range() a
+    cada columna de flag_shapes i desarà el resultat a shape_mat.
+
+- Class: cmd_question
+  Output: Mireu els continguts de shape_mat.
+  CorrectAnswer: shape_mat
+  AnswerTests: any_of_exprs('shape_mat', 'print(shape_mat)')
+  Hint: Entreu shape_mate per veure els seus continguts.
+
+- Class: text
+  Output: Cada columna de shape_mat dóna el mínim (fila 1) i el màxim (fila 2)
+    nombre de cops que apareix la forma respectiva a diferents banderes.
+
+- Class: cmd_question
+  Output: Useu la funció class() per confirmar que shape_mat és una matriu.
+  CorrectAnswer: class(shape_mat)
+  AnswerTests: omnitest(correctExpr='class(shape_mat)')
+  Hint: class(shape_mat) retorna la classe de shape_mat.
+
+- Class: text
+  Output: Com hem vist, sapply() sempre intenta simplificar el resultat
+    donat per lapply(). Ha pogut fer-ho amb èxit per a cadascú dels exemples
+    que hem mirat fins ara. Mirem un exemple on sapply() no pot resoldre com
+    simplificar el resultat i en conseqüència retorna una llista, igual a
+    lapply().
+
+- Class: cmd_question
+  Output: Quan li donem un vector, la funció unique() retorna un vector on 
+    tots els elements duplicats han estat eliminats. En altres paraules,
+    unique() retorna un vector de sols els elements «únics» («unique» en
+    anglès). Per veure com funciona, proveu unique(c(3, 4, 5, 5, 5, 6, 6)).
+  CorrectAnswer: unique(c(3, 4, 5, 5, 5, 6, 6))
+  AnswerTests: omnitest(correctExpr='unique(c(3, 4, 5, 5, 5, 6, 6))')
+  Hint: Feu unique(c(3, 4, 5, 5, 5, 6, 6)) per veure com funciona la funció
+    unique().
+
+- Class: cmd_question
+  Output: Volem saber els valors únics per a cada variable al conjunt de
+    dades flags. Per aconseguir això, useu lapply() per aplicar al funció
+    unique() a cada columna en el conjunt de dades flags, desant el resultat
+    a una variable anomenada unique_vals.
+  CorrectAnswer: unique_vals <- lapply(flags, unique)
+  AnswerTests: omnitest(correctExpr='unique_vals <- lapply(flags, unique)')
+  Hint: Proveu unique_vals <- lapply(flags, unique).
+
+- Class: cmd_question
+  Output: Imprimiu el valor de unique_vals a la pantalla.
+  CorrectAnswer: unique_vals
+  AnswerTests: any_of_exprs('unique_vals', 'print(unique_vals)')
+  Hint: Entreu unique_vals per veure els seus continguts.
+
+- Class: cmd_question
+  Output: "Atès que unique_vals és una llista, podeu usar el que heu après
+    per determinar la longitud de cada element de unique_vals (o sigui
+    el nombre de valors únics per a cada variable). Simplifiqueu el resultat,
+    si és possible. Pista: Apliqueu la funció length() per a cada element
+    de unique_vals."
+  CorrectAnswer: sapply(unique_vals, length)
+  AnswerTests: omnitest(correctExpr='sapply(unique_vals, length)')
+  Hint: Apliqueu la funció length() a cada element de la llista unique_vals
+    usant sapply(). Recordeu, no poseu parèntesis després del nom de la funció
+    que esteu aplicant (o sigui length).
+
+- Class: text
+  Output: El fet que els elements de la llista unique_vals són vectors
+    de longitud *diferent* implica un problema per a sapply(), atès que no
+    hi ha cap manera òbvia de simplificar el resultat.
+
+- Class: cmd_question
+  Output: Useu sapply() per aplicar la funció unique() a cada element del
+    conjunt de dades flags per veure que obteniu la mateixa llista sense
+    simplificació que obteniu quan apliqueu lapply().
+  CorrectAnswer: sapply(flags, unique)
+  AnswerTests: omnitest(correctExpr='sapply(flags, unique)')
+  Hint: Useu sapply(flags, unique) per aplicar la funció unique a cada
+    element de flags, i no aconseguint simplificar el resultat.
+
+- Class: text
+  Output: Ocasionalment us pot caldre aplicar una funció que encara no està
+    definida, obligant-vos a escriure la vostra pròpia funció. L'escriptura
+    de funcions en R està fora del rang d'aquesta lliçó, però mirem un
+    exemple ràpid sobre com ho podeu fer en el context de funcions bucle.
+
+- Class: text
+  Output: Suposem que teniu interès sols en el segon ítem de cada element
+    de la llista unique_vals que heu acabat de crear. Atès que cada element
+    de la llista unique_vals és un vector i no coneixem cap funció integrada
+    a R que retorni el segon element d'un vector, construirem la nostra pròpia
+    funció.
+
+- Class: cmd_question
+  Output: lapply(unique_vals, function(elem) elem[2]) retornarà el segon
+    element de la llista unique_vals. Noteu que la nostra funció sols té un
+    argument, elem, que es simplement una «variable fictícia» que pren
+    el valor de cada element de unique_vals al seu torn. Entreu
+    aquesta expressió ara.
+  CorrectAnswer: lapply(unique_vals, function(elem) elem[2])
+  AnswerTests: calculates_same_value('lapply(unique_vals, function(elem) elem[2])')
+  Hint: Useu lapply(unique_vals, function(elem) elem[2]) per retornar una
+    llista que contingut el segon ítem de cada element de la llista
+    unique_vals.
+
+- Class: text
+  Output: L'única diferència entre els exemples previs i aquest exemple és
+    que estem definint i usant la nostra pròpia funció directament a la
+    crida de lapply(). La nostra funció no té nom i desapareix en quant
+    lapply() acaba d'usar-la. Aquestes funcions anomenades «anònimes» poden
+    ser molt útils quan no disposem de funcions integrades de R.
+
+- Class: text
+  Output: En aquesta lliçó heu après a usar les potents funcions
+    lapply() i sapply() per aplicar una operació sobre els elements d'una
+    llista. A la propera lliçó, mirarem unes parents properes de
+    lapply() i sapply().
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""

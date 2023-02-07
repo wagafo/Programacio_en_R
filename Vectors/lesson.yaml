@@ -1,0 +1,285 @@
+- Class: meta
+  Course: Programacio en R
+  Lesson: Vectors
+  Author: Nick Carchedi, Walter Garcia-Fontes
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: L'estructura de dades més senzilla i més comuna a l'R és el vector.
+
+- Class: text
+  Output: 'Els vectors venen en dos sabors diferents: vectors atòmics i
+    llistes. Un vector atòmic conté exactament un tipus de dades, mentre
+    que una llista pot contenir múltiples tipus de dades. Explorarem primer
+    els vectors atòmics, i després les llistes.'
+
+- Class: text
+  Output: A lliçons prèvies, vam tractar únicament de vectors numèrics,
+    que són un tipus de vectors atòmics. Altres tipus de vectors atòmics
+    inclouen els lògics, de caràcters, d'enters i de nombres complexos.
+    A aquesta lliçó, mirarem com funcionen els vectors lògics i de caràcters.
+
+- Class: text
+  Output: Els vectors lògics poden contenir els valors TRUE, FALSE i NA (per
+    «Not Available», és a dir «no disponible»). Aquests valors es generen
+    com a resultat de «condicions» lògiques. A continuació experimentarem
+    amb condicions simples.
+
+- Class: cmd_question
+  Output: En primer lloc, creeu un vector numèric num_vect que contingui
+    els valors 0.5, 55, -10 i 6.
+  CorrectAnswer: num_vect <- c(0.5, 55, -10, 6)
+  AnswerTests: omnitest(correctExpr='num_vect <- c(0.5, 55, -10, 6)')
+  Hint: Recordeu que la funció c() s'usar per crear un vector. Si us oblideu
+    com usar-ho, useu ?c per accedir el fitxer d'ajuda. No us oblideu
+    d'assignar el resultat a una nova variable anomenada num_vect.
+
+- Class: cmd_question
+  Output: Creeu ara una variable anomenada tf que obté el resultat de
+    num_vect < 1, que és llegeix com «num_vect  és més petit que 1».
+  CorrectAnswer: tf <- num_vect < 1
+  AnswerTests: omnitest(correctExpr='tf <- num_vect < 1')
+  Hint: Useu tf <- num_vect < 1 per assignar el resultat de num_vect < 1 a
+    una variable anomenada tf.
+
+- Class: mult_question
+  Output: Com penseu que serà?
+  CorrectAnswer: a vector of 4 logical values
+  AnswerChoices: un vector de 4 valors lògics; un valor lògic únic
+  AnswerTests: omnitest(correctVal='un vector de 4 valors lògics')
+  Hint: Us recordeu de la nostra lliçó sobre vectors aritmètics? S'explicava
+    que l'R realitza moltes operacions d'una manera element-per-element. Havíem
+    anomenat això operacions «vectorizadas».
+
+- Class: cmd_question
+  Output: Imprimiu ara a la pantalla el contingut de tf.
+  CorrectAnswer: tf
+  AnswerTests: omnitest(correctExpr='tf')
+  Hint: Simplement escriviu tf i premeu Intro per veure el seu valor.
+
+- Class: text
+  Output: La sentència num_vect < 1 és una condició i tf ens dius si
+    cada element corresponent del nostre vector numèric satisfà aquesta
+    condició.
+
+- Class: text
+  Output: El primer element de num_vect és 0.5, que és més petit que 1 i
+    en conseqüència la sentència 0.5 < 1 és TRUE. El segon element de
+    num_vect és 55, que és més gran que 1, en conseqüència la sentència
+    55 < 1 és FALSE. S'aplica la mateixa lògica al tercer i quart elements.
+
+- Class: cmd_question
+  Output: Ara provarem una altra condició. Entreu num_vect >= 6 sense
+    assignar el resultat a una nova variable.
+  CorrectAnswer: num_vect >= 6
+  AnswerTests: omnitest(correctExpr='num_vect >= 6')
+  Hint: No creeu una nova variable per a aquesta condició. Simplement volem
+    veure el resultat de num_vect >= 6. Assegureu-vos que no hi ha cap espai
+    entre els símbols «>» i «=». Penseu-lo com un sol símbol representant
+    «més gran o igual a».
+
+- Class: text 
+  Output: Aquest cop, estem preguntant-nos si cada element individual de
+    num_vect és més gran O igual a 6. Atès que sols 55 i 6 són més grans o
+    iguals a 6, el segon i quart elements del resultat són TRUE i el primer
+    i tercer elements are FALSE.
+
+- Class: text
+  Output: Los símbols «<» i «>=» que surten en aquests exemples s'anomenen
+    «operadors lógics». Altres operadors lògics inclouen «>», «<=», «==» per
+    igualtat exacta, i «!=» per no igual. 
+
+- Class: text
+  Output: Si tenim dues expressions lògiques, A i B, podem preguntar-nos
+    si almenys una és TRUE amb «A | B» (el «o» lògic o en teoria de conjunts,
+    «unió») o si les dues són TRUE amb «A & B» (un «i» lògic o en teoria de
+    conjunts, «intersecció»). Finalment, «!A» és la negació d'A i és TRUE
+    quan A és FALSE, i és FALSE quan A és TRUE.
+
+- Class: text
+  Output: És una bona idea dedicar una mica de temps a jugar amb les
+    diverses combinacions d'aquests operadors lògics fins que us
+    acostumeu al seu ús. Farem aquí un parell d'exemple perquè us podeu
+    iniciar.
+
+- Class: text
+  Output: Intenteu predir el millor que podeu el resultat de cada una de
+    les sentències següents. Podeu usar llapis i paper per treballar-les si
+    és útil. Si us bloquegeu, simplement endevineu i tindreu una probabilitat
+    del 50% d'obtenir la resposta correcta!
+
+- Class: mult_question
+  Output: (3 > 5) & (4 == 4)
+  CorrectAnswer: 'FALSE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='FALSE')
+  Hint: Dividiu aquest problema en 2 peces. El símbol «&» al mig diu que
+    la sentència serà TRUE si les dues peces són TRUE, sinó serà FALSE.
+    La vostra feina és veure si les peces són TRUE o FALSE, perquè sigui
+    TRUE, les dues han de ser TRUE.
+
+- Class: mult_question
+  Output: (TRUE == TRUE) | (TRUE == FALSE)
+  CorrectAnswer: 'TRUE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: Dividiu aquest problema en 2 peces. El símbol «|» al mig diu que
+    la sentència serà TRUE si almenys una peça és TRUE. Si les dues són
+    FALSE, serà FALSE. La vostra feina és veure si les peces són TRUE o FALSE.
+
+- Class: mult_question
+  Output: ((111 >= 111) | !(TRUE)) & ((4 + 1) == 5)
+  CorrectAnswer: 'TRUE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: Aquesta és més complicada. Recordeu que el símbol «!» nega tot el
+    que ve després d'ell. També hi ha un «ordre d'operacions» que és important
+    en aquest cas. Les condicions que estan entre parèntesis s'avaluen en
+    primer lloc. Un cop les avalueu, avalueu les relacions exteriors.
+
+- Class: text
+  Output: No us preocupeu si trobeu aquests casos difícils. Se suposa que
+    són difícils. Treballar amb sentències lògiques a l'R requereix pràctica,
+    però els vostres esforços es veuran recompensats en lliçons futures
+    (per exemple quan es fan subconjunts de dades i estructures de control).
+
+- Class: text
+  Output: Els vectors de caràcters també són molt comuns a l'R. Es fan
+    servir cometes dobles per distingir objectes de caràcters, com a
+    l'exemple següent.
+
+- Class: cmd_question
+  Output: 'Creu un vector de caràcters que contingui les paraules següents:
+    "El", "meu", "nom", "és". Recordeu-vos d''envoltar cada paraula en el
+    seu propi conjunt de cometes dobles, de manera que l''R sàpiga que
+    són cadenes de caràcters. Emmagatzemeu el vector en una variable
+    anomenada my_char.'
+  CorrectAnswer: my_char <- c("El", "meu", "nom", "és")
+  AnswerTests: omnitest(correctExpr='my_char <- c("El", "meu", "nom", "és")')
+  Hint: 'Entreu my_char <- c("El", "meu", "nom", "és") per crear una nova
+    variable que contingui un vector de caràcters de longitud 3. Assegureu-vos
+    que les comes que separen les paraules estan a FORA de les cometes dobles,
+    sinó no feu l''R considerarà que les comes formen part de les paraules.'
+
+- Class: cmd_question
+  Output: Imprimiu a la pantalla el contingut de my_char per veure com es veu.
+  CorrectAnswer: my_char
+  AnswerTests: omnitest(correctExpr='my_char')
+  Hint: Escriviu my_char per veure el seus continguts.
+
+- Class: text
+  Output: Ara mateix, my_char és un vector de caràcters de longitud 4. Suposem
+    que volem unir els elements de my_char a una sola cadena contínua de
+    caràcters (o sigui un vector de caràcters de longitud 1). Podem fer això
+    usant la funció paste(). 
+
+- Class: cmd_question
+  Output: Entreu ara paste(my_char, collapse = " "). Assegureu-vos que hi ha
+    un espai entre les cometes dobles a l'argument «collapse». Veureu la
+    raó en un moment.
+  CorrectAnswer: paste(my_char, collapse = " ")
+  AnswerTests: omnitest(correctExpr='paste(my_char, collapse = " ")')
+  Hint: Useu paste(my_char, collapse = " ") per col·lapsar les paraules al
+    vector perquè gairebé formin una oració. Hi hauria d'haver un espai únic
+    entre les cometes dobles de l'argument «collapse» perquè hi hagi espais
+    únics separant les paraules.
+
+- Class: text
+  Output: L'argument «collapse» a la funció paste() li diu a l'R que quan
+    unim els elements del vector de caràcters my_char, volem separar-los
+    amb un espai.
+
+- Class: text
+  Output: Sembla que ens falta quelcom... Ah, sí! El vostre nom!
+
+- Class: cmd_question
+  Output: Per afegir (o «concatenate», és a dir «concatenar») el vostre
+    nom al final de my_char, useu la funció c(). Heu d'entrar
+    c(my_char, "el_vostre_nom_aquí"). Poseu el vostre nom en cometes dobles
+    on hem posat "el_vostre_nom_aquí". Proveu-ho ara, emmagatzemant el resultat
+    en una nova variable anomenada my_name.
+  CorrectAnswer: my_name <- c(my_char, "Swirl")
+  AnswerTests: var_is_a("character", "my_name"); expr_uses_func("c"); expr_creates_var("my_name");
+    val_has_length(5)
+  Hint: Afegiu el vostre nom al final del vector my_char usant la funció c().
+    Assegureu-vos d'assignar el resultat a una nova variable anomenada my_name.
+    Si el vostre nom fos «Swirl», hauríeu d'entrar
+    my_name <- c(my_char, "Swirl").
+
+- Class: cmd_question
+  Output: Mireu els continguts de my_name.
+  CorrectAnswer: my_name
+  AnswerTests: omnitest(correctExpr='my_name')
+  Hint: Entreu my_name i premeu Intro per veure els seus continguts.
+
+- Class: cmd_question
+  Output: Ara usem la funció paste() un cop més per unir les paraules de
+    my_name en una única cadena de caràcters. No us oblideu de posar
+    collapse = " "!
+  CorrectAnswer: paste(my_name, collapse = " ")
+  AnswerTests: omnitest(correctExpr='paste(my_name, collapse = " ")')
+  Hint: Useu paste(my_name, collapse = " ") per unir les cinc paraules,
+    separades per un espai.
+
+- Class: text
+  Output: En aquest exemple, hem usat la funció paste() per col·lapsar
+    els elements d'un únic vector de caràcters, però paste() també pot
+    usar-se per unir elements de múltiples vectors de caràcters.
+
+- Class: cmd_question
+  Output: En el cas més simple, podem unir dos vectors de caràcters cada
+    u amb longitud igual a 1 (o sigui unir dues paraules). Intenteu
+    paste("Hola", "món!", sep = " "), on l'argument «sep» li diu a l'R
+    que separi els elements units amb un espai.
+  CorrectAnswer: paste("Hola", "món!", sep = " ")
+  AnswerTests: omnitest(correctExpr='paste("Hola", "món!", sep = " ")')
+  Hint: Entreu paste("Hola", "món!", sep = " ") per unir les dues paraules
+    "Hola" i "món!", separades per un espai. Hi hauria d'haver un espai
+    entre les cometes dobles de l'argument «sep» de la funció paste().
+
+- Class: cmd_question
+  Output: Per un exemple lleugerament més complex, podem unir dos vectors,
+    cada u de longitud 3. Useu paste() per unir el vector d'enters 1:3
+    amb el vector de caràcters c("X", "Y", "Z"). Aquest cop, useu
+    sep = "" per no deixar cap espai entre els elements units.
+  CorrectAnswer: paste(1:3, c("X", "Y", "Z"), sep = "")
+  AnswerTests: any_of_exprs('paste(1:3, c("X", "Y", "Z"), sep = "")', 'paste(c(1:3), c("X", "Y", "Z"), sep = "")')
+  Hint: Useu paste(1:3, c("X", "Y", "Z"), sep = "") per veure què passa
+    quan unim dos vectors de longitud igual usant paste().
+
+- Class: text
+  Output: 'Què penseu que passarà si els nostres vectors són de longitud
+    diferent? (Pista: vam parlar sobre això a la lliçó anterior.)'
+
+- Class: cmd_question
+  Output: Reciclatge de vectors! Intenteu paste(LETTERS, 1:4, sep = "-"), on
+    LETTERS és una variable predefinida a l'R que conté totes les 26 lletres
+    de l'alfabet anglès.
+  CorrectAnswer: paste(LETTERS, 1:4, sep = "-")
+  AnswerTests: omnitest(correctExpr='paste(LETTERS, 1:4, sep = "-")')
+  Hint: Entreu paste(LETTERS, 1:4, sep = "-") per veure com l'R recicla
+    el vector 1:4 per concordar amb la longitud de LETTERS. Noteu que estem
+    usant «-» ara com a separador en comptes d'un espai.
+
+- Class: text
+  Output: Atès que el vector de caràcters LETTERS és més llarg que el
+    vector numèric 1:4, l'R simplement recicla, o repeteix, 1:4 fins que
+    concorda amb la longitud de LETTERS.
+
+- Class: text
+  Output: També és útil notar que el vector numèric 1:4 és «forçat» a un vector
+    de caràcters per la funció paste().
+
+- Class: text
+  Output: Discutirem aquest forçament en una altra lliçó, però tot el
+    que vol dir és que els números 1, 2, 3 i 4 a la sortida de dalt no
+    són més números de 4, sinó caràcters "1", "2", "3" i "4".
+
+- Class: mult_question
+  Output: "Voldríeu rebre crèdit per completar aquest curs a Coursera.org?"
+  CorrectAnswer: NULL
+  AnswerChoices: Yes;No
+  AnswerTests: coursera_on_demand()
+  Hint: ""
