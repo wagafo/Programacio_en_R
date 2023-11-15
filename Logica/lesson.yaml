@@ -140,8 +140,7 @@
     lògiques múltiples. Aquí és on l'operador I o l'operador O són útils.
 
 - Class: cmd_question
-  Output: Mirem com funciona l'operador I. Hi ha dos operadors I a l'R,
-    «&» i «&&». Tots dos operadors funcionen de manera semblant, si els
+  Output: Mirem com funciona l'operador I. L'operador I («&») fa que si els
     operands dret i esquerre són TRUE, l'operació sencera és TRUE, en cas
     contrari és FALSE. Per exemple, TRUE & TRUE avalua a TRUE. Proveu d'entrar
     FALSE & FALSE per veure com s'avalua.
@@ -151,8 +150,7 @@
 
 - Class: cmd_question
   Output: Podeu usar l'operador «&» per avaluar I al llarg d'un vector.
-    La versió «&&» de l'operador sols avalua el primer membre d'un vector.
-    Provarem els dos per practicar. Entreu TRUE & c(TRUE, FALSE, FALSE).
+    Entreu TRUE & c(TRUE, FALSE, FALSE).
   CorrectAnswer: "TRUE & c(TRUE, FALSE, FALSE)"
   AnswerTests: omnitest(correctExpr='TRUE & c(TRUE, FALSE, FALSE)')
   Hint: Per veure com funciona l'operador I amb un vector, entreu
@@ -163,23 +161,9 @@
     es recicla al llarg de cada element del vector a l'operand dret. Això
     és equivalent a l'ordre c(TRUE, TRUE, TRUE) & c(TRUE, FALSE, FALSE). 
  
-- Class: cmd_question
-  Output: Ara entrarem la mateixa expressió excepte que usarem la versió
-     «&&» de l'operador. Entreu l'expressió TRUE && c(TRUE, FALSE, FALSE)
-  CorrectAnswer: "TRUE && c(TRUE, FALSE, FALSE)"
-  AnswerTests: omnitest(correctExpr='TRUE && c(TRUE, FALSE, FALSE)')
-  Hint: Com veureu, la versió && de I funciona de manera diferent. Entreu
-    TRUE && c(TRUE, FALSE, FALSE)"
-
-- Class: text
-  Output: En aquest cas, l'operand esquerre sols s'avalua amb el primer
-    membre de l'operand dret (el vector). La resta d'elements al vector
-    no s'avaluen en absolut en aquesta expressió.
-    
 - Class : text
   Output: L'operador O segueix un conjunt semblant de regles. La versió
-    «|» de O avalua O al llarg de tot un vector, mentre que la versió
-    «||» de O sols avalua el primer membre d'un vector.
+    «|» de O avalua O al llarg de tot un vector.
 
 - Class : text
   Output: Una expressió que usi l'operador O avaluarà a TRUE si l'operand
@@ -194,51 +178,43 @@
   AnswerTests: omnitest(correctExpr='TRUE | c(TRUE, FALSE, FALSE)')
   Hint: Proveu l'operador vectoritzat OR entrant TRUE | c(TRUE, FALSE, FALSE)
   
-- Class: cmd_question
-  Output: Provem ara la versió no vectoritzada de O. Entreu
-    TRUE || c(TRUE, FALSE, FALSE).
-  CorrectAnswer: "TRUE || c(TRUE, FALSE, FALSE)"
-  AnswerTests: omnitest(correctExpr='TRUE || c(TRUE, FALSE, FALSE)')
-  Hint: Com veureu, la versió || de O no és vectoritzada. Entreu
-    TRUE || c(TRUE, FALSE, FALSE)"
-  
 - Class : text
   Output: 'Les expressions lògiques es poden ajuntar tal com les
     expressions aritmètiques. Les expressions:
-    «6 != 10 && FALSE && 1 >= 2» o «TRUE || 5 < 9.3 || FALSE»
+    «6 != 10 & FALSE & 1 >= 2» o «TRUE | 5 < 9.3 | FALSE»
     es poden veure perfectament.'
   
 - Class : cmd_question
   Output: Com podreu recordar, les operacions aritmètiques tenen un ordre
     de realització, de la mateixa manera les expressions lògiques tenen
     un ordre. Tots els operadors I s'avaluen abans que els operadors O. Mirem
-    un exemple d'un cas ambigu. Entreu 5 > 8 || 6 != 8 && 4 > 3.9
-  CorrectAnswer: "5 > 8 || 6 != 8 && 4 > 3.9"
-  AnswerTests: omnitest(correctExpr='5 > 8 || 6 != 8 && 4 > 3.9')
+    un exemple d'un cas ambigu. Entreu 5 > 8 | 6 != 8 & 4 > 3.9
+  CorrectAnswer: "5 > 8 | 6 != 8 & 4 > 3.9"
+  AnswerTests: omnitest(correctExpr='5 > 8 | 6 != 8 & 4 > 3.9')
   Hint: Mireu com funciona l'ordre de les operacions entrant
-    5 > 8 || 6 != 8 && 4 > 3.9
+    5 > 8 | 6 != 8 & 4 > 3.9
   
 - Class : text
   Output: Anem a recórrer l'ordre de les operacions al cas de dalt. Primer
     s'avaluen els operands esquerre i dret de l'operador I. 6 no és igual a 8,
     4 és més gran que 3.9, consegüentment els dos operands són TRUE de manera
-    que l'expresssió TRUE && TRUE avalua a TRUE. A continuació mirem l'operand
+    que l'expresssió TRUE & TRUE avalua a TRUE. A continuació mirem l'operand
     esquerre de l'operador OR. 5 no és més gran que 8, així que tota l'expressió
-    es redueix a FALSE || TRUE. Atès que l'operand dret de l'expressió és TRUE,
+    es redueix a FALSE | TRUE. Atès que l'operand dret de l'expressió és TRUE,
     l'expressió sencera avalua a TRUE.
     
 - Class: mult_question
   Output: Quina de les expressions següents avalua a TRUE?
-  CorrectAnswer: "TRUE && FALSE || 9 >= 4 && 3 < 6"
-  AnswerChoices: "TRUE && FALSE || 9 >= 4 && 3 < 6; TRUE && 62 < 62 && 44 >= 44; 99.99 > 100 || 45 < 7.3 || 4 != 4.0; FALSE || TRUE && FALSE"
-  AnswerTests: omnitest(correctVal='TRUE && FALSE || 9 >= 4 && 3 < 6')
+  CorrectAnswer: "TRUE & FALSE | 9 >= 4 & 3 < 6"
+  AnswerChoices: "TRUE & FALSE | 9 >= 4 & 3 < 6; TRUE & 62 < 62 & 44 >= 44; 99.99 > 100 | 45 < 7.3 | 4 != 4.0; FALSE | TRUE & FALSE"
+  AnswerTests: omnitest(correctVal='TRUE & FALSE | 9 >= 4 & 3 < 6')
   Hint: Proveu les diferents expressions i prepareu la vostra resposta.
   
 - Class: mult_question
   Output: Quina de les expressions següents avalua a FALSE?
-  CorrectAnswer: "FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5"
-  AnswerChoices: "FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5; FALSE || TRUE && 6 != 4 || 9 > 4; !(8 > 4) ||  5 == 5.0 && 7.8 >= 7.79; 6 >= -9 && !(6 > 7) && !(!TRUE)"
-  AnswerTests: omnitest(correctVal='FALSE && 6 >= 6 || 7 >= 8 || 50 <= 49.5')
+  CorrectAnswer: "FALSE & 6 >= 6 | 7 >= 8 | 50 <= 49.5"
+  AnswerChoices: "FALSE & 6 >= 6 | 7 >= 8 | 50 <= 49.5; FALSE | TRUE & 6 != 4 | 9 > 4; !(8 > 4) |  5 == 5.0 & 7.8 >= 7.79; 6 >= -9 & !(6 > 7) & !(!TRUE)"
+  AnswerTests: omnitest(correctVal='FALSE & 6 >= 6 | 7 >= 8 | 50 <= 49.5')
   Hint: Proveu les diferents expressions i prepareu la vostra resposta.
   
 - Class : text
